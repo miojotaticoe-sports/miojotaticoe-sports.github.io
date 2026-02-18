@@ -1,26 +1,45 @@
-const track = document.querySelector('.carousel-track');
-const items = document.querySelectorAll('.carousel-item');
-const prevButton = document.getElementById('prev');
-const nextButton = document.getElementById('next');
-let currentIndex = 0;
-
-// Atualiza a posição do carrossel
-function updateCarousel() {
-  const width = items[0].clientWidth;
-  track.style.transform = `translateX(-${currentIndex * width}px)`;
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  menu.classList.toggle("show");
 }
 
-// Evento para o botão "Anterior"
-prevButton.addEventListener('click', () => {
-  currentIndex = (currentIndex === 0) ? items.length - 1 : currentIndex - 1;
-  updateCarousel();
+// Preencher dados da última vitória
+document.getElementById("timeCasa").innerText = siteData.ultimaVitoria.timeCasa;
+document.getElementById("placar").innerText = siteData.ultimaVitoria.placar;
+document.getElementById("timeFora").innerText = siteData.ultimaVitoria.timeFora;
+document.getElementById("mvp").innerText = "MVP: " + siteData.ultimaVitoria.mvp;
+
+// Preencher jogadores
+const lista = document.getElementById("listaJogadores");
+
+siteData.jogadores.forEach(jogador => {
+  const div = document.createElement("div");
+  div.className = "card";
+
+  div.innerHTML = `
+    <img src="${jogador.foto}" alt="Foto de ${jogador.nome}" class="avatar" />
+    <strong>${jogador.nome}</strong><br>
+    <small>${jogador.funcao}</small>
+    <div class="status">${jogador.status}</div>
+  `;
+
+  lista.appendChild(div);
 });
 
-// Evento para o botão "Próximo"
-nextButton.addEventListener('click', () => {
-  currentIndex = (currentIndex === items.length - 1) ? 0 : currentIndex + 1;
-  updateCarousel();
-});
+document.getElementById("proxAdversario").innerText = siteData.partidas.proxima.adversario;
+document.getElementById("proxData").innerText = siteData.partidas.proxima.data;
+document.getElementById("proxMapa").innerText = siteData.partidas.proxima.mapa;
 
-// Atualiza o carrossel ao redimensionar a janela
-window.addEventListener('resize', updateCarousel);
+const historicoDiv = document.getElementById("historicoPartidas");
+
+siteData.partidas.historico.forEach(jogo => {
+  const div = document.createElement("div");
+  div.className = "match-item";
+
+  div.innerHTML = `
+    <strong>${jogo.resultado}</strong> — ${jogo.placar} vs ${jogo.adversario}<br>
+    <small>Mapa: ${jogo.mapa} | MVP: ${jogo.mvp}</small>
+  `;
+
+  historicoDiv.appendChild(div);
+});
