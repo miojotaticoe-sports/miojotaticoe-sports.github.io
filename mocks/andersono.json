@@ -1,0 +1,23 @@
+{
+  "privacy_mode": "public",
+  "winrate": 0.5000,
+  "total_matches": 100,
+  "name": "Andersono",
+  "steam64_id": "76561198063443948",
+  "ranks": {
+    "leetify": 0.00,
+    "premier": null,
+    "faceit": null,
+    "competitive": []
+  },
+  "rating": {
+    "aim": 50.0,
+    "positioning": 50.0,
+    "utility": 50.0
+  },
+  "stats": {
+    "reaction_time_ms": 600,
+    "flashbang_hit_friend_per_flashbang": 0.30
+  },
+  "recent_matches": []
+}

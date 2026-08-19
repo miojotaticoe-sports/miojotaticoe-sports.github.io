@@ -80,9 +80,10 @@ function preencherPartidas(recentMatchesFromMock) {
   const historicoDiv = document.getElementById("historicoPartidas");
   if (!historicoDiv) return;
 
-  // Se houver partidas reais do Leetify, exibe apenas as 3 últimas
+  // Se houver partidas reais do Leetify, ordena por data mais recente e exibe apenas as 3 últimas
   if (recentMatchesFromMock && recentMatchesFromMock.length > 0) {
-    const top3 = recentMatchesFromMock.slice(0, 3);
+    const sorted = [...recentMatchesFromMock].sort((a, b) => new Date(b.finished_at || 0) - new Date(a.finished_at || 0));
+    const top3 = sorted.slice(0, 3);
     historicoDiv.innerHTML = "";
     top3.forEach(m => {
       let resultado = "Empate";
@@ -263,7 +264,8 @@ function abrirModalJogador(jogador, mockData) {
 
     // Recent Matches
     if (mockData.recent_matches && mockData.recent_matches.length > 0) {
-      const top3 = mockData.recent_matches.slice(0, 3);
+      const sorted = [...mockData.recent_matches].sort((a, b) => new Date(b.finished_at || 0) - new Date(a.finished_at || 0));
+      const top3 = sorted.slice(0, 3);
       const rows = top3.map(m => {
         let outcomeClass = "outcome-tie";
         let outcomeLabel = "Empate";

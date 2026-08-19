@@ -4,7 +4,7 @@ const path = require('path');
 const API_KEY = process.env.LEETIFY_API_KEY;
 
 console.log("=========================================");
-console.log("🔍 MIOJO TÁTICO - LEETIFY API SYNC (LUCÃO)");
+console.log("🔍 MIOJO TÁTICO - LEETIFY API SYNC BOT");
 console.log("=========================================");
 
 if (!API_KEY || API_KEY.trim() === "") {
@@ -14,39 +14,78 @@ if (!API_KEY || API_KEY.trim() === "") {
 }
 
 const repoPath = path.resolve(__dirname, '..');
-const mockPath = path.join(repoPath, 'mocks', 'lucao.json');
-const steam64Id = "76561198020209185";
+const dataFilePath = path.join(repoPath, 'data.js');
+
+if (!fs.existsSync(dataFilePath)) {
+  console.error("❌ Arquivo data.js não encontrado!");
+  process.exit(1);
+}
+
+const dataContent = fs.readFileSync(dataFilePath, 'utf8');
+const evalCode = dataContent.replace('const siteData', 'global.siteData');
+eval(evalCode);
+
+const jogadores = global.siteData?.jogadores || [];
 const cleanKey = API_KEY.trim();
 
-async function fetchLucaoProfile() {
-  const targetUrl = `https://api-public.cs-prod.leetify.com/v3/profile?steam64_id=${steam64Id}`;
-
-  const headers = {
+function getAuthHeaders() {
+  return {
     "_leetify_key": cleanKey,
     "Authorization": `Bearer ${cleanKey}`,
     "Accept": "application/json",
     "User-Agent": "MiojoTaticoBot/1.0"
   };
+}
+
+async function fetchPlayerProfile(jogador) {
+  if (!jogador.mockFile || (!jogador.steam64_id && !jogador.leetifyId)) {
+    console.log(`⏩ [PULANDO] ${jogador.nome}: sem ID cadastrado (AFK).`);
+    return false;
+  }
+
+  const mockPath = path.join(repoPath, jogador.mockFile);
+  const param = jogador.steam64_id ? `steam64_id=${jogador.steam64_id}` : `id=${jogador.leetifyId}`;
+  const targetUrl = `https://api-public.cs-prod.leetify.com/v3/profile?${param}`;
+  const headers = getAuthHeaders();
 
   try {
-    console.log(`🌐 Requisitando perfil do Lucão: ${targetUrl}`);
+    console.log(`\n🔄 [PROCESSANDO] ${jogador.nome} (${param})...`);
+    console.log(`🌐 Requisitando: ${targetUrl}`);
+
     const res = await fetch(targetUrl, { headers });
     const bodyText = await res.text();
 
     console.log(`   ➔ Status HTTP: ${res.status}`);
 
     if (res.ok) {
-      const profileData = JSON.parse(bodyText);
-      fs.writeFileSync(mockPath, JSON.stringify(profileData, null, 2), 'utf8');
-      console.log(`🎉 [SUCESSO] Resposta completa do perfil do Lucão salva com sucesso em mocks/lucao.json!`);
+      try {
+        const profileData = JSON.parse(bodyText);
+        fs.writeFileSync(mockPath, JSON.stringify(profileData, null, 2), 'utf8');
+        console.log(`🎉 [SUCESSO] ${jogador.nome} atualizado em ${jogador.mockFile}`);
+        return true;
+      } catch (jsonErr) {
+        console.error(`   ❌ Resposta não é JSON válido: ${bodyText.slice(0, 150)}`);
+      }
     } else {
-      console.error(`❌ [ERRO HTTP ${res.status}]: ${bodyText.slice(0, 300)}`);
-      process.exit(1);
+      console.error(`   ❌ Erro HTTP ${res.status}: ${bodyText.slice(0, 200)}`);
     }
   } catch (err) {
-    console.error(`❌ [ERRO CONEXÃO]:`, err.message);
-    process.exit(1);
+    console.error(`   ❌ Falha ao requisitar ${targetUrl}:`, err.message);
   }
+
+  return false;
 }
 
-fetchLucaoProfile();
+async function main() {
+  let successCount = 0;
+  for (const jogador of jogadores) {
+    const ok = await fetchPlayerProfile(jogador);
+    if (ok) successCount++;
+  }
+
+  console.log("\n=========================================");
+  console.log(`✨ Sincronização concluída! (${successCount}/${jogadores.length} jogadores atualizados)`);
+  console.log("=========================================");
+}
+
+main();
