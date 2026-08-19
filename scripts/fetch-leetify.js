@@ -23,38 +23,97 @@ eval(evalCode);
 
 const jogadores = global.siteData?.jogadores || [];
 
+// Lista de hosts possíveis para resiliência
+const BASE_HOSTS = [
+  "https://api-public-docs.cs-prod.leetify.com",
+  "https://api.leetify.com/api",
+  "https://api.cs-prod.leetify.com"
+];
+
+async function fetchFromLeetify(targetId, steam64Id) {
+  const headers = {
+    "_leetify_api_key": API_KEY,
+    "Authorization": `Bearer ${API_KEY}`,
+    "Accept": "application/json",
+    "User-Agent": "MiojoTaticoBot/1.0"
+  };
+
+  for (const host of BASE_HOSTS) {
+    // 1. Tentar endpoint v3/profile
+    const param = targetId ? `id=${targetId}` : `steam64_id=${steam64Id}`;
+    const profileUrl = `${host}/v3/profile?${param}`;
+
+    try {
+      console.log(`🌐 tentando: ${profileUrl}`);
+      const res = await fetch(profileUrl, { headers });
+      
+      if (res.ok) {
+        const text = await res.text();
+        try {
+          const profileData = JSON.parse(text);
+
+          // Buscar histórico de partidas v3/profile/matches
+          try {
+            const matchesUrl = `${host}/v3/profile/matches?${param}`;
+            const matchesRes = await fetch(matchesUrl, { headers });
+            if (matchesRes.ok) {
+              const matchesData = await matchesRes.json();
+              if (Array.isArray(matchesData)) {
+                profileData.recent_matches = matchesData;
+              }
+            }
+          } catch (mErr) {
+            console.warn(`  ⚠️ Não foi possível obter histórico de partidas: ${mErr.message}`);
+          }
+
+          return profileData;
+        } catch (jsonErr) {
+          console.warn(`  ⚠️ Resposta não é JSON em ${profileUrl} (provavelmente HTML de documentação)`);
+        }
+      } else {
+        const errText = await res.text().catch(() => "");
+        console.warn(`  ⚠️ HTTP ${res.status} em ${profileUrl}: ${errText.slice(0, 150)}`);
+      }
+    } catch (err) {
+      console.warn(`  ❌ Falha ao conectar em ${profileUrl}: ${err.message}`);
+    }
+
+    // 2. Fallback tentar /api/v1/players/{id}
+    if (targetId) {
+      const v1Url = `${host}/api/v1/players/${targetId}`;
+      try {
+        const resV1 = await fetch(v1Url, { headers });
+        if (resV1.ok) {
+          const dataV1 = await resV1.json();
+          return dataV1;
+        }
+      } catch (errV1) {
+        // ignora
+      }
+    }
+  }
+
+  return null;
+}
+
 async function updatePlayer(jogador) {
   if (!jogador.leetifyId && !jogador.steam64_id) {
     console.log(`⏩ [PULANDO] ${jogador.nome}: Jogador sem Leetify ID (AFK).`);
     return;
   }
 
-  const targetId = jogador.leetifyId || jogador.steam64_id;
   if (!jogador.mockFile) return;
 
   const mockPath = path.join(repoPath, jogador.mockFile);
-  const url = `https://api-public-docs.cs-prod.leetify.com/api/v1/players/${targetId}`;
+  console.log(`\n🔄 [PROCESSANDO] ${jogador.nome}...`);
 
-  try {
-    console.log(`🔄 [BUSCANDO] Atualizando ${jogador.nome} (ID: ${targetId})...`);
+  const updatedData = await fetchFromLeetify(jogador.leetifyId, jogador.steam64_id);
 
-    const response = await fetch(url, {
-      headers: {
-        "_leetify_api_key": API_KEY,
-        "Authorization": `Bearer ${API_KEY}`,
-        "User-Agent": "MiojoTaticoBot/1.0"
-      }
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      fs.writeFileSync(mockPath, JSON.stringify(data, null, 2), 'utf8');
-      console.log(`✅ [SUCESSO] ${jogador.nome} atualizado em ${jogador.mockFile}`);
-    } else {
-      console.warn(`⚠️ [AVISO] Leetify API retornou HTTP ${response.status} para ${jogador.nome}. Mantendo mock existente.`);
-    }
-  } catch (err) {
-    console.error(`❌ [ERRO] Falha ao buscar dados de ${jogador.nome}:`, err.message);
+  if (updatedData) {
+    fs.writeFileSync(mockPath, JSON.stringify(updatedData, null, 2), 'utf8');
+    console.log(`✅ [SUCESSO] ${jogador.nome} atualizado em ${jogador.mockFile}`);
+  } else {
+    console.warn(`⚠️ [MANTIDO] Não foi possível atualizar ${jogador.nome} via API. Mantendo arquivo local intacto.`);
   }
 }
 
@@ -63,7 +122,7 @@ async function main() {
   for (const jogador of jogadores) {
     await updatePlayer(jogador);
   }
-  console.log("✨ Atualização concluída!");
+  console.log("\n✨ Processo de atualização finalizado!");
 }
 
 main();
