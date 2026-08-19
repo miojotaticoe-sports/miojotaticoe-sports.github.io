@@ -3,10 +3,14 @@ const path = require('path');
 
 const API_KEY = process.env.LEETIFY_API_KEY;
 
-if (!API_KEY) {
-  console.log("⚠️ LEETIFY_API_KEY não foi encontrada nas variáveis de ambiente.");
-  console.log("💡 O script continuará utilizando os mocks locais sem interromper o site.");
-  process.exit(0);
+console.log("=========================================");
+console.log("🔍 MIOJO TÁTICO - LEETIFY API SYNC (LUCÃO)");
+console.log("=========================================");
+
+if (!API_KEY || API_KEY.trim() === "") {
+  console.error("❌ ERRO CRÍTICO: LEETIFY_API_KEY não foi encontrada nas variáveis de ambiente!");
+  console.error("👉 Cadastre a Secret 'LEETIFY_API_KEY' nas configurações do repositório no GitHub.");
+  process.exit(1);
 }
 
 const repoPath = path.resolve(__dirname, '..');
@@ -23,106 +27,85 @@ eval(evalCode);
 
 const jogadores = global.siteData?.jogadores || [];
 
-// Lista de hosts possíveis para resiliência
-const BASE_HOSTS = [
-  "https://api-public-docs.cs-prod.leetify.com",
-  "https://api.leetify.com/api",
-  "https://api.cs-prod.leetify.com"
-];
-
-async function fetchFromLeetify(targetId, steam64Id) {
-  const headers = {
-    "_leetify_api_key": API_KEY,
-    "Authorization": `Bearer ${API_KEY}`,
+function getAuthHeaders(apiKey) {
+  const cleanKey = apiKey.trim();
+  return {
+    "_leetify_key": cleanKey,
+    "Authorization": `Bearer ${cleanKey}`,
     "Accept": "application/json",
     "User-Agent": "MiojoTaticoBot/1.0"
   };
+}
 
-  for (const host of BASE_HOSTS) {
-    // 1. Tentar endpoint v3/profile
-    const param = targetId ? `id=${targetId}` : `steam64_id=${steam64Id}`;
-    const profileUrl = `${host}/v3/profile?${param}`;
+async function fetchLucaoProfile(steam64Id) {
+  const headers = getAuthHeaders(API_KEY);
+  const targetUrl = `https://api-public.cs-prod.leetify.com/v3/profile?steam64_id=${steam64Id}`;
 
-    try {
-      console.log(`🌐 tentando: ${profileUrl}`);
-      const res = await fetch(profileUrl, { headers });
-      
-      if (res.ok) {
-        const text = await res.text();
-        try {
-          const profileData = JSON.parse(text);
+  try {
+    console.log(`🌐 Requisitando perfil do Lucão: ${targetUrl}`);
+    const res = await fetch(targetUrl, { headers });
+    const bodyText = await res.text();
 
-          // Buscar histórico de partidas v3/profile/matches
-          try {
-            const matchesUrl = `${host}/v3/profile/matches?${param}`;
-            const matchesRes = await fetch(matchesUrl, { headers });
-            if (matchesRes.ok) {
-              const matchesData = await matchesRes.json();
-              if (Array.isArray(matchesData)) {
-                profileData.recent_matches = matchesData;
-              }
-            }
-          } catch (mErr) {
-            console.warn(`  ⚠️ Não foi possível obter histórico de partidas: ${mErr.message}`);
-          }
+    console.log(`   ➔ Status HTTP: ${res.status}`);
 
-          return profileData;
-        } catch (jsonErr) {
-          console.warn(`  ⚠️ Resposta não é JSON em ${profileUrl} (provavelmente HTML de documentação)`);
-        }
-      } else {
-        const errText = await res.text().catch(() => "");
-        console.warn(`  ⚠️ HTTP ${res.status} em ${profileUrl}: ${errText.slice(0, 150)}`);
-      }
-    } catch (err) {
-      console.warn(`  ❌ Falha ao conectar em ${profileUrl}: ${err.message}`);
-    }
-
-    // 2. Fallback tentar /api/v1/players/{id}
-    if (targetId) {
-      const v1Url = `${host}/api/v1/players/${targetId}`;
+    if (res.ok) {
       try {
-        const resV1 = await fetch(v1Url, { headers });
-        if (resV1.ok) {
-          const dataV1 = await resV1.json();
-          return dataV1;
+        const profileData = JSON.parse(bodyText);
+        console.log(`   ✅ Perfil obtido com sucesso!`);
+
+        // Tentar obter também histórico de partidas
+        try {
+          const matchesUrl = `https://api-public.cs-prod.leetify.com/v3/profile/matches?steam64_id=${steam64Id}`;
+          console.log(`🌐 Buscando partidas do Lucão: ${matchesUrl}`);
+          const matchesRes = await fetch(matchesUrl, { headers });
+          if (matchesRes.ok) {
+            const matchesData = await matchesRes.json();
+            if (Array.isArray(matchesData)) {
+              profileData.recent_matches = matchesData;
+              console.log(`   ✅ Partidas recentes integradas (${matchesData.length} partidas).`);
+            }
+          }
+        } catch (mErr) {
+          console.warn(`   ⚠️ Falha ao buscar partidas:`, mErr.message);
         }
-      } catch (errV1) {
-        // ignora
+
+        return profileData;
+      } catch (jsonErr) {
+        console.error(`   ❌ Falha ao parsear JSON retornado: ${bodyText.slice(0, 200)}`);
       }
+    } else {
+      console.error(`   ❌ Resposta de erro (HTTP ${res.status}): ${bodyText.slice(0, 200)}`);
     }
+  } catch (err) {
+    console.error(`   ❌ Falha ao requisitar ${targetUrl}:`, err.message);
   }
 
   return null;
 }
 
-async function updatePlayer(jogador) {
-  if (!jogador.leetifyId && !jogador.steam64_id) {
-    console.log(`⏩ [PULANDO] ${jogador.nome}: Jogador sem Leetify ID (AFK).`);
-    return;
+async function main() {
+  const lucao = jogadores.find(j => j.nome === "Lucão");
+  if (!lucao) {
+    console.error("❌ Jogador Lucão não foi encontrado em data.js!");
+    process.exit(1);
   }
 
-  if (!jogador.mockFile) return;
+  const mockPath = path.join(repoPath, lucao.mockFile);
+  console.log(`\n🔄 [TESTE ISOLADO] Processando apenas Lucão (steam64_id: ${lucao.steam64_id})...`);
 
-  const mockPath = path.join(repoPath, jogador.mockFile);
-  console.log(`\n🔄 [PROCESSANDO] ${jogador.nome}...`);
-
-  const updatedData = await fetchFromLeetify(jogador.leetifyId, jogador.steam64_id);
+  const updatedData = await fetchLucaoProfile(lucao.steam64_id);
 
   if (updatedData) {
     fs.writeFileSync(mockPath, JSON.stringify(updatedData, null, 2), 'utf8');
-    console.log(`✅ [SUCESSO] ${jogador.nome} atualizado em ${jogador.mockFile}`);
+    console.log(`\n🎉 [SUCESSO] Dados do Lucão atualizados e salvos em ${lucao.mockFile}!`);
   } else {
-    console.warn(`⚠️ [MANTIDO] Não foi possível atualizar ${jogador.nome} via API. Mantendo arquivo local intacto.`);
+    console.error(`\n❌ [FALHA] Não foi possível atualizar os dados do Lucão via API Leetify.`);
+    process.exit(1);
   }
-}
 
-async function main() {
-  console.log("🚀 Iniciando atualização automática Leetify API para Miojo Tático...");
-  for (const jogador of jogadores) {
-    await updatePlayer(jogador);
-  }
-  console.log("\n✨ Processo de atualização finalizado!");
+  console.log("=========================================");
+  console.log("✨ Teste do Lucão finalizado!");
+  console.log("=========================================");
 }
 
 main();
