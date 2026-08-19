@@ -4,7 +4,7 @@ const siteData = {
     logoCasa: "logo.png",
     placar: "13 x 7",
     timeFora: "Inimigos do Clutch",
-    logoFora: "avatars/foulen.png",
+    logoFora: "enemy.jpg",
     data: "2026-06-20",
     mapa: "de_cache",
     mvp: "Foulen"
