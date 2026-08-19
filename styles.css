@@ -913,5 +913,170 @@ body {
   color: #888;
 }
 
+/* ===== Notícias ===== */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.news-card {
+  background: rgba(26, 26, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 22px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-3px);
+  border-color: #00ff9c66;
+}
+
+.news-category {
+  font-size: 11px;
+  font-weight: bold;
+  color: #00ff9c;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.news-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.news-date {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 12px;
+}
+
+.news-snippet {
+  font-size: 13px;
+  color: #bbb;
+  line-height: 1.5;
+}
+
+/* ===== Loja Oficial ===== */
+.store-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.store-card {
+  background: rgba(26, 26, 34, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.store-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #F84982;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.store-img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  margin: 16px 0;
+}
+
+.store-item-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.store-price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #00ff9c;
+  margin-bottom: 16px;
+}
+
+.btn-buy {
+  background: #00ff9c;
+  color: #000;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-buy:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 255, 156, 0.4);
+}
+
+.btn-disabled {
+  background: #333;
+  color: #777;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: not-allowed;
+  width: 100%;
+}
+
+/* ===== Patrocinadores ===== */
+.sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sponsor-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+}
+
+.sponsor-icon {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+.sponsor-name {
+  display: block;
+  font-size: 14px;
+  color: #fff;
+}
+
+.sponsor-type {
+  font-size: 11px;
+  color: #888;
+}
+
 
 

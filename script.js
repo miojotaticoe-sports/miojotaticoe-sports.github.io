@@ -480,6 +480,62 @@ function renderizarRadarDeMapas() {
   }).join("");
 }
 
+// ===== Renderizar Notícias =====
+function renderizarNoticias() {
+  const newsGrid = document.getElementById("newsGrid");
+  if (!newsGrid || !siteData?.noticias) return;
+
+  newsGrid.innerHTML = siteData.noticias.map(n => `
+    <div class="news-card">
+      <div class="news-category">${n.categoria}</div>
+      <h3 class="news-title">${n.titulo}</h3>
+      <div class="news-date">📅 ${n.data}</div>
+      <p class="news-snippet">${n.resumo}</p>
+    </div>
+  `).join("");
+}
+
+// ===== Renderizar Loja Oficial =====
+function renderizarLoja() {
+  const storeGrid = document.getElementById("storeGrid");
+  if (!storeGrid || !siteData?.loja) return;
+
+  storeGrid.innerHTML = siteData.loja.map(item => {
+    const isEsgotado = item.status === "esgotado";
+    const btnText = isEsgotado ? "Esgotado" : "🛒 Comprar";
+    const btnClass = isEsgotado ? "btn-disabled" : "btn-buy";
+    const onclickAttr = isEsgotado ? "" : `onclick="adicionarAoCarrinho('${item.nome}')"`;
+
+    return `
+      <div class="store-card">
+        <span class="store-badge">${item.tag}</span>
+        <img src="${item.foto}" alt="${item.nome}" class="store-img" />
+        <h3 class="store-item-name">${item.nome}</h3>
+        <div class="store-price">${item.preco}</div>
+        <button class="${btnClass}" ${onclickAttr}>${btnText}</button>
+      </div>
+    `;
+  }).join("");
+}
+
+function adicionarAoCarrinho(nomeItem) {
+  alert(`🛒 [LOJA MIOJO] "${nomeItem}" foi adicionado ao seu carrinho fictício!`);
+}
+
+// ===== Renderizar Patrocinadores =====
+function renderizarPatrocinadores() {
+  const sponsorsGrid = document.getElementById("sponsorsGrid");
+  if (!sponsorsGrid || !siteData?.patrocinadores) return;
+
+  sponsorsGrid.innerHTML = siteData.patrocinadores.map(s => `
+    <div class="sponsor-card">
+      <div class="sponsor-icon">${s.icone}</div>
+      <strong class="sponsor-name">${s.nome}</strong>
+      <small class="sponsor-type">${s.tipo}</small>
+    </div>
+  `).join("");
+}
+
 // Lógica de Renderização do Modal
 function abrirModalJogador(jogador, mockData) {
   const modal = document.getElementById("playerModal");
@@ -631,6 +687,9 @@ document.addEventListener("DOMContentLoaded", () => {
   preencherVitoria();
   preencherPartidas();
   carregarJogadores();
+  renderizarNoticias();
+  renderizarLoja();
+  renderizarPatrocinadores();
   setupMobileMenuAutoClose();
   setupScrollspy();
 });
