@@ -136,7 +136,7 @@ async function carregarJogadores() {
         if (mockCache[jogador.mockFile]) {
           mockData = mockCache[jogador.mockFile];
         } else {
-          const response = await fetch(jogador.mockFile);
+          const response = await fetch(`${jogador.mockFile}?t=${Date.now()}`);
           if (response.ok) {
             mockData = await response.json();
             mockCache[jogador.mockFile] = mockData;
