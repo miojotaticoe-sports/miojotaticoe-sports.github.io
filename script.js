@@ -63,8 +63,8 @@ function preencherVitoria() {
   if (mvp) mvp.innerText = "MVP: " + siteData.ultimaVitoria.mvp;
 }
 
-// Preencher dados de partidas
-function preencherPartidas() {
+// Preencher dados de partidas (limita às 3 últimas partidas)
+function preencherPartidas(recentMatchesFromMock) {
   if (!siteData || !siteData.partidas) return;
 
   if (siteData.partidas.proxima) {
@@ -78,9 +78,33 @@ function preencherPartidas() {
   }
 
   const historicoDiv = document.getElementById("historicoPartidas");
-  if (historicoDiv && siteData.partidas.historico) {
+  if (!historicoDiv) return;
+
+  // Se houver partidas reais do Leetify, exibe apenas as 3 últimas
+  if (recentMatchesFromMock && recentMatchesFromMock.length > 0) {
+    const top3 = recentMatchesFromMock.slice(0, 3);
     historicoDiv.innerHTML = "";
-    siteData.partidas.historico.forEach(jogo => {
+    top3.forEach(m => {
+      let resultado = "Empate";
+      if (m.outcome === "win") resultado = "Vitória";
+      else if (m.outcome === "loss") resultado = "Derrota";
+
+      const placar = m.score ? `${m.score[0]} - ${m.score[1]}` : "N/A";
+      const mapa = (m.map_name || "de_unknown").replace("de_", "").replace("cs_", "");
+      const mapaFormatted = mapa.charAt(0).toUpperCase() + mapa.slice(1);
+
+      const div = document.createElement("div");
+      div.className = "match-item";
+      div.innerHTML = `
+        <strong>${resultado}</strong> — ${placar}<br>
+        <small>Mapa: ${mapaFormatted} | Rating: ${m.leetify_rating !== undefined ? Number(m.leetify_rating).toFixed(2) : "N/A"}</small>
+      `;
+      historicoDiv.appendChild(div);
+    });
+  } else if (siteData.partidas.historico) {
+    const top3 = siteData.partidas.historico.slice(0, 3);
+    historicoDiv.innerHTML = "";
+    top3.forEach(jogo => {
       const div = document.createElement("div");
       div.className = "match-item";
       div.innerHTML = `
@@ -119,6 +143,9 @@ async function carregarJogadores() {
         }
 
         if (mockData) {
+          if (mockData.recent_matches && mockData.recent_matches.length > 0) {
+            preencherPartidas(mockData.recent_matches);
+          }
           const leetifyRating = mockData.ranks?.leetify ?? null;
           const winratePct = mockData.winrate !== undefined ? (mockData.winrate * 100).toFixed(1) + "%" : "N/A";
           const totalMatches = mockData.total_matches ?? "N/A";
