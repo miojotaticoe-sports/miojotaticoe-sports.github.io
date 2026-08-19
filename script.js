@@ -49,17 +49,47 @@ function setupScrollspy() {
   sections.forEach(section => observer.observe(section));
 }
 
+// Helper de formatação de data (ex: 20/06/2026)
+function formatarData(dateStr) {
+  if (!dateStr) return "";
+  const d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" });
+}
+
 // Preencher dados da última vitória
 function preencherVitoria() {
   if (!siteData || !siteData.ultimaVitoria) return;
   const timeCasa = document.getElementById("timeCasa");
   const placar = document.getElementById("placar");
+  const dataVitoria = document.getElementById("dataVitoria");
   const timeFora = document.getElementById("timeFora");
   const mvp = document.getElementById("mvp");
 
-  if (timeCasa) timeCasa.innerText = siteData.ultimaVitoria.timeCasa;
+  if (timeCasa) {
+    if (siteData.ultimaVitoria.logoCasa) {
+      timeCasa.innerHTML = `<img src="${siteData.ultimaVitoria.logoCasa}" alt="${siteData.ultimaVitoria.timeCasa}" class="team-logo-img" title="${siteData.ultimaVitoria.timeCasa}" />`;
+    } else {
+      timeCasa.innerText = siteData.ultimaVitoria.timeCasa;
+    }
+  }
+
   if (placar) placar.innerText = siteData.ultimaVitoria.placar;
-  if (timeFora) timeFora.innerText = siteData.ultimaVitoria.timeFora;
+
+  if (dataVitoria) {
+    const dtFormatada = formatarData(siteData.ultimaVitoria.data);
+    const mapaName = (siteData.ultimaVitoria.mapa || "").replace("de_", "").toUpperCase();
+    dataVitoria.innerHTML = `📅 ${dtFormatada} ${mapaName ? '| ' + mapaName : ''}`;
+  }
+
+  if (timeFora) {
+    if (siteData.ultimaVitoria.logoFora) {
+      timeFora.innerHTML = `<img src="${siteData.ultimaVitoria.logoFora}" alt="${siteData.ultimaVitoria.timeFora}" class="team-logo-img" title="${siteData.ultimaVitoria.timeFora}" />`;
+    } else {
+      timeFora.innerText = siteData.ultimaVitoria.timeFora;
+    }
+  }
+
   if (mvp) mvp.innerText = "MVP: " + siteData.ultimaVitoria.mvp;
 }
 
@@ -124,6 +154,7 @@ function renderizarHistoricoEquipe() {
     const placar = m.score ? `${m.score[0]} - ${m.score[1]}` : "N/A";
     const mapa = (m.map_name || "de_unknown").replace("de_", "").replace("cs_", "");
     const mapaFormatted = mapa.charAt(0).toUpperCase() + mapa.slice(1);
+    const dtFormatada = formatarData(m.finished_at);
 
     const lineupBadges = m.players.map(p => `
       <span class="lineup-player" title="${p.nome}">
@@ -136,7 +167,7 @@ function renderizarHistoricoEquipe() {
     div.className = "match-item";
     div.innerHTML = `
       <strong>${resultado}</strong> — ${placar}<br>
-      <small>Mapa: ${mapaFormatted}</small>
+      <small>📅 ${dtFormatada} | Mapa: ${mapaFormatted}</small>
       <div class="match-lineup">
         <span class="lineup-label">👥 Miojos em campo:</span>
         ${lineupBadges}
@@ -303,11 +334,12 @@ function abrirModalJogador(jogador, mockData) {
         const mapName = (m.map_name || "de_unknown").replace("de_", "").replace("cs_", "");
         const mapFormatted = mapName.charAt(0).toUpperCase() + mapName.slice(1);
 
+        const dtFormatada = formatarData(m.finished_at);
         return `
           <div class="modal-match-row">
             <div>
               <strong>${mapFormatted}</strong>
-              <small style="color:#888; display:block;">Placar: ${scoreStr}</small>
+              <small style="color:#888; display:block;">📅 ${dtFormatada} | Placar: ${scoreStr}</small>
             </div>
             <div class="${outcomeClass}">${outcomeLabel}</div>
           </div>
