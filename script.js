@@ -473,7 +473,7 @@ function renderizarRadarDeMapas() {
         </div>
         <div class="map-details">
           <span>🎮 Jogos: ${m.total}</span>
-          <span>🟢 V: ${m.wins} | 🔴 D: ${m.losses}</span>
+          <span>🟢 V: ${m.wins} | 🟡 E: ${m.ties} | 🔴 D: ${m.losses}</span>
         </div>
       </div>
     `;
@@ -571,13 +571,42 @@ function abrirModalJogador(jogador, mockData) {
       `;
     }
 
-    // Key Stats Grid (Reação, Flash nos Amigos, Winrate, Partidas)
+    // Calcular Melhor Mapa com base na média do leetify_rating das partidas recentes
+    let melhorMapaStr = "N/A";
+    if (mockData.recent_matches && mockData.recent_matches.length > 0) {
+      const mapRatingsMap = new Map();
+      mockData.recent_matches.forEach(m => {
+        if (!m.map_name || m.leetify_rating === undefined) return;
+        const cleanMap = m.map_name.replace("de_", "").replace("cs_", "");
+        const mapName = cleanMap.charAt(0).toUpperCase() + cleanMap.slice(1);
+
+        if (!mapRatingsMap.has(mapName)) {
+          mapRatingsMap.set(mapName, { mapName, total: 0, count: 0 });
+        }
+        const st = mapRatingsMap.get(mapName);
+        st.total += m.leetify_rating;
+        st.count++;
+      });
+
+      const best = Array.from(mapRatingsMap.values())
+        .map(m => ({ mapName: m.mapName, avg: m.total / m.count }))
+        .sort((a, b) => b.avg - a.avg)[0];
+
+      if (best) {
+        const formattedRating = (best.avg > 0 ? "+" : "") + Number(best.avg).toFixed(2);
+        melhorMapaStr = `${best.mapName} (${formattedRating})`;
+      }
+    }
+
+    // Key Stats Grid (Reação, Flash nos Amigos, Winrate, HS %, Duetos, Melhor Mapa)
     const reactionTime = mockData.stats?.reaction_time_ms ? Math.round(mockData.stats.reaction_time_ms) + " ms" : "N/A";
     const teamFlashed = mockData.stats?.flashbang_hit_friend_per_flashbang !== undefined
       ? (mockData.stats.flashbang_hit_friend_per_flashbang).toFixed(2)
       : "N/A";
     const winratePct = mockData.winrate ? (mockData.winrate * 100).toFixed(1) + "%" : "N/A";
     const totalMatches = mockData.total_matches || "N/A";
+    const hsPct = mockData.stats?.accuracy_head ? Math.round(mockData.stats.accuracy_head) + "%" : "N/A";
+    const duelsPct = mockData.stats?.t_opening_duel_success_percentage ? Math.round(mockData.stats.t_opening_duel_success_percentage) + "%" : "N/A";
 
     keyStatsGrid = `
       <div class="modal-section-title">⚡ Estatísticas em Jogo</div>
@@ -597,6 +626,18 @@ function abrirModalJogador(jogador, mockData) {
         <div class="modal-stat-card">
           <div class="lbl">Total Jogos</div>
           <div class="val">${totalMatches}</div>
+        </div>
+        <div class="modal-stat-card">
+          <div class="lbl">% Headshot</div>
+          <div class="val">${hsPct}</div>
+        </div>
+        <div class="modal-stat-card">
+          <div class="lbl">Duetos Abertura</div>
+          <div class="val">${duelsPct}</div>
+        </div>
+        <div class="modal-stat-card" style="grid-column: span 2;">
+          <div class="lbl">🗺️ Melhor Mapa</div>
+          <div class="val" style="font-size: 14px;">${melhorMapaStr}</div>
         </div>
       </div>
     `;
