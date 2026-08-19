@@ -237,12 +237,18 @@ async function carregarJogadores() {
       }
     }
 
+    const targetId = jogador.steam64_id || jogador.leetifyId || mockData?.steam64_id || mockData?.id;
+    const leetifyLinkHtml = targetId
+      ? `<a href="https://leetify.com/app/profile/${targetId}" target="_blank" rel="noopener noreferrer" class="leetify-data-link" onclick="event.stopPropagation()">View on Leetify ↗</a>`
+      : "";
+
     div.innerHTML = `
       <img src="${jogador.foto}" alt="Foto de ${jogador.nome}" class="avatar" />
       <strong class="player-name">${jogador.nome}</strong><br>
       <small class="player-role">${jogador.funcao}</small>
       <div class="status">${jogador.status}</div>
       ${statsHtml}
+      ${leetifyLinkHtml}
       <div class="click-hint">🔍 Clique para detalhes</div>
     `;
 
@@ -360,6 +366,10 @@ function abrirModalJogador(jogador, mockData) {
   }
 
   const steamNick = mockData?.name ? `Steam: ${mockData.name}` : "Membro Miojo Tático";
+  const targetId = jogador.steam64_id || jogador.leetifyId || mockData?.steam64_id || mockData?.id;
+  const leetifyModalLink = targetId
+    ? `<a href="https://leetify.com/app/profile/${targetId}" target="_blank" rel="noopener noreferrer" class="leetify-data-link" style="margin-top: 6px;">View on Leetify ↗</a>`
+    : "";
 
   modalBody.innerHTML = `
     <div class="modal-header-info">
@@ -368,6 +378,7 @@ function abrirModalJogador(jogador, mockData) {
         <h2>${jogador.nome}</h2>
         <div class="modal-steam-name">${steamNick}</div>
         <div class="status">${jogador.status}</div>
+        ${leetifyModalLink}
       </div>
     </div>
     ${ratingsSection}

@@ -217,10 +217,35 @@ body {
 
 /* ===== Footer ===== */
 .footer {
-  padding: 24px;
-  text-align: center;
+  padding: 30px 20px;
   background: #111;
   color: #777;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.leetify-badge-link {
+  display: inline-block;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.leetify-badge-link:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+.leetify-badge-img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 /* ===== Mobile ===== */
@@ -640,6 +665,24 @@ body {
   height: 18px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+/* ===== Link Exigido pelas Diretrizes do Leetify (Regra 3.1) ===== */
+.leetify-data-link {
+  color: #F84982;
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.leetify-data-link:hover {
+  opacity: 0.85;
+  color: #ff6699;
 }
 
 
