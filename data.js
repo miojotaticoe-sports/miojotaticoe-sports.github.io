@@ -78,7 +78,7 @@ const siteData = {
   patrocinadores: [
     { nome: "Nissin Miojo", tipo: "Patrocinador Master", icone: "🍜" },
     { nome: "Café Extra Forte", tipo: "Energia pro Corujão", icone: "☕" },
-    { nome: "Dipirona 500mg", tipo: "Suporte Pós-Ranked", icone: "💊" },
+    { nome: "Dipirona 500mg", tipo: "Suporte Pós-Premier", icone: "💊" },
     { nome: "Teclado Engordurado Inc.", tipo: "Equipamentos Pro", icone: "⌨️" }
   ]
-};
+};
