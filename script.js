@@ -259,6 +259,225 @@ async function carregarJogadores() {
 
     lista.appendChild(div);
   }
+
+  // Renderizar Hall da Fama, Comparador e Radar de Mapas após carregar os mocks
+  renderizarHallDaFama();
+  inicializarComparadorVersus();
+  renderizarRadarDeMapas();
+}
+
+// ===== Hall da Fama (Troféus do Time) =====
+function renderizarHallDaFama() {
+  const trophyGrid = document.getElementById("trophyGrid");
+  if (!trophyGrid) return;
+
+  const validPlayers = [];
+  for (const j of siteData.jogadores) {
+    if (j.mockFile && mockCache[j.mockFile]) {
+      validPlayers.push({ jogador: j, mock: mockCache[j.mockFile] });
+    }
+  }
+
+  if (validPlayers.length === 0) return;
+
+  // Calculando vencedores dos troféus:
+  const mvpLeetify = [...validPlayers].sort((a, b) => (b.mock.ranks?.leetify ?? -999) - (a.mock.ranks?.leetify ?? -999))[0];
+  const aimGod = [...validPlayers].sort((a, b) => (b.mock.rating?.aim ?? 0) - (a.mock.rating?.aim ?? 0))[0];
+  const fastReaction = [...validPlayers].filter(p => p.mock.stats?.reaction_time_ms).sort((a, b) => a.mock.stats.reaction_time_ms - b.mock.stats.reaction_time_ms)[0];
+  const teamFlasher = [...validPlayers].filter(p => p.mock.stats?.flashbang_hit_friend_per_flashbang !== undefined).sort((a, b) => b.mock.stats.flashbang_hit_friend_per_flashbang - a.mock.stats.flashbang_hit_friend_per_flashbang)[0];
+  const utilMaster = [...validPlayers].sort((a, b) => (b.mock.rating?.utility ?? 0) - (a.mock.rating?.utility ?? 0))[0];
+
+  const trophies = [
+    {
+      title: "👑 MVP do Leetify",
+      desc: "Maior Rating Geral",
+      winner: mvpLeetify?.jogador,
+      val: mvpLeetify ? `${(mvpLeetify.mock.ranks?.leetify > 0 ? "+" : "")}${Number(mvpLeetify.mock.ranks?.leetify).toFixed(2)}` : "N/A",
+      icon: "🏆"
+    },
+    {
+      title: "🎯 Rei da Mira",
+      desc: "Maior Precisão / Aim Rating",
+      winner: aimGod?.jogador,
+      val: aimGod ? `${Math.round(aimGod.mock.rating?.aim || 0)} / 100` : "N/A",
+      icon: "🎯"
+    },
+    {
+      title: "⚡ Reflexo de Gato",
+      desc: "Menor Tempo de Reação",
+      winner: fastReaction?.jogador,
+      val: fastReaction ? `${Math.round(fastReaction.mock.stats?.reaction_time_ms)} ms` : "N/A",
+      icon: "⚡"
+    },
+    {
+      title: "💣 Terror dos Amigos",
+      desc: "Maior Cegador de Aliados",
+      winner: teamFlasher?.jogador,
+      val: teamFlasher ? `${(teamFlasher.mock.stats?.flashbang_hit_friend_per_flashbang).toFixed(2)} / flash` : "N/A",
+      icon: "😵‍💫"
+    },
+    {
+      title: "🛡️ Mestre Utilitário",
+      desc: "Melhor Uso de Granadas",
+      winner: utilMaster?.jogador,
+      val: utilMaster ? `${Math.round(utilMaster.mock.rating?.utility || 0)} / 100` : "N/A",
+      icon: "💣"
+    }
+  ];
+
+  trophyGrid.innerHTML = trophies.map(t => {
+    if (!t.winner) return "";
+    return `
+      <div class="trophy-card">
+        <div class="trophy-icon">${t.icon}</div>
+        <div class="trophy-title">${t.title}</div>
+        <div class="trophy-desc">${t.desc}</div>
+        <div class="trophy-winner">
+          <img src="${t.winner.foto}" alt="${t.winner.nome}" class="trophy-avatar" />
+          <div>
+            <strong>${t.winner.nome}</strong>
+            <div class="trophy-val">${t.val}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+// ===== Comparador X1 (Modo Versus) =====
+function inicializarComparadorVersus() {
+  const sel1 = document.getElementById("playerSelect1");
+  const sel2 = document.getElementById("playerSelect2");
+  if (!sel1 || !sel2 || !siteData?.jogadores) return;
+
+  const validJ = siteData.jogadores.filter(j => j.mockFile && mockCache[j.mockFile]);
+  if (validJ.length < 2) return;
+
+  const options = validJ
+    .map(j => `<option value="${j.nome}">${j.nome}</option>`)
+    .join("");
+
+  sel1.innerHTML = options;
+  sel2.innerHTML = options;
+
+  sel1.selectedIndex = 0;
+  sel2.selectedIndex = 1;
+
+  compararJogadores();
+}
+
+function compararJogadores() {
+  const sel1 = document.getElementById("playerSelect1");
+  const sel2 = document.getElementById("playerSelect2");
+  const resDiv = document.getElementById("versusResults");
+  if (!sel1 || !sel2 || !resDiv) return;
+
+  const j1 = siteData.jogadores.find(j => j.nome === sel1.value);
+  const j2 = siteData.jogadores.find(j => j.nome === sel2.value);
+
+  if (!j1 || !j2) return;
+
+  const mock1 = mockCache[j1.mockFile] || {};
+  const mock2 = mockCache[j2.mockFile] || {};
+
+  const statsList = [
+    { label: "Rating Leetify", v1: mock1.ranks?.leetify ?? 0, v2: mock2.ranks?.leetify ?? 0, fmt: v => (v > 0 ? "+" : "") + Number(v).toFixed(2) },
+    { label: "Mira (Aim)", v1: Math.round(mock1.rating?.aim || 0), v2: Math.round(mock2.rating?.aim || 0), fmt: v => v + " / 100" },
+    { label: "Posicionamento", v1: Math.round(mock1.rating?.positioning || 0), v2: Math.round(mock2.rating?.positioning || 0), fmt: v => v + " / 100" },
+    { label: "Utilitárias", v1: Math.round(mock1.rating?.utility || 0), v2: Math.round(mock2.rating?.utility || 0), fmt: v => v + " / 100" },
+    { label: "Winrate", v1: mock1.winrate ? Math.round(mock1.winrate * 100) : 0, v2: mock2.winrate ? Math.round(mock2.winrate * 100) : 0, fmt: v => v + "%" },
+    { label: "Tempo de Reação", v1: Math.round(mock1.stats?.reaction_time_ms || 999), v2: Math.round(mock2.stats?.reaction_time_ms || 999), fmt: v => v + " ms", lowerIsBetter: true }
+  ];
+
+  const rows = statsList.map(st => {
+    let win1 = false;
+    let win2 = false;
+
+    if (st.lowerIsBetter) {
+      if (st.v1 < st.v2) win1 = true;
+      else if (st.v2 < st.v1) win2 = true;
+    } else {
+      if (st.v1 > st.v2) win1 = true;
+      else if (st.v2 > st.v1) win2 = true;
+    }
+
+    return `
+      <div class="versus-row">
+        <div class="versus-val ${win1 ? 'winner' : ''}">${st.fmt(st.v1)}</div>
+        <div class="versus-label">${st.label}</div>
+        <div class="versus-val ${win2 ? 'winner' : ''}">${st.fmt(st.v2)}</div>
+      </div>
+    `;
+  }).join("");
+
+  resDiv.innerHTML = `
+    <div class="versus-header">
+      <div class="versus-player">
+        <img src="${j1.foto}" alt="${j1.nome}" class="versus-avatar" />
+        <strong>${j1.nome}</strong>
+        <small>${j1.funcao}</small>
+      </div>
+      <div class="versus-badge-vs">VS</div>
+      <div class="versus-player">
+        <img src="${j2.foto}" alt="${j2.nome}" class="versus-avatar" />
+        <strong>${j2.nome}</strong>
+        <small>${j2.funcao}</small>
+      </div>
+    </div>
+    <div class="versus-rows-list">
+      ${rows}
+    </div>
+  `;
+}
+
+// ===== Radar de Mapas (Pool da Equipe) =====
+function renderizarRadarDeMapas() {
+  const mapGrid = document.getElementById("mapGrid");
+  if (!mapGrid || allTeamMatchesMap.size === 0) return;
+
+  const mapStatsMap = new Map();
+
+  allTeamMatchesMap.forEach(m => {
+    if (!m.map_name) return;
+    const cleanMap = m.map_name.replace("de_", "").replace("cs_", "");
+    const mapName = cleanMap.charAt(0).toUpperCase() + cleanMap.slice(1);
+
+    if (!mapStatsMap.has(mapName)) {
+      mapStatsMap.set(mapName, { mapName, total: 0, wins: 0, losses: 0, ties: 0 });
+    }
+
+    const st = mapStatsMap.get(mapName);
+    st.total++;
+    if (m.outcome === "win") st.wins++;
+    else if (m.outcome === "loss") st.losses++;
+    else st.ties++;
+  });
+
+  const sortedMaps = Array.from(mapStatsMap.values())
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 6);
+
+  mapGrid.innerHTML = sortedMaps.map(m => {
+    const winratePct = Math.round((m.wins / m.total) * 100);
+    let barColor = "linear-gradient(90deg, #ff4444, #ffaa00)";
+    if (winratePct >= 50) barColor = "linear-gradient(90deg, #00c6ff, #00ff9c)";
+
+    return `
+      <div class="map-card">
+        <div class="map-header">
+          <strong>${m.mapName}</strong>
+          <span class="map-winrate">${winratePct}% Vitória</span>
+        </div>
+        <div class="map-progress-bg">
+          <div class="map-progress-fill" style="width: ${winratePct}%; background: ${barColor}"></div>
+        </div>
+        <div class="map-details">
+          <span>🎮 Jogos: ${m.total}</span>
+          <span>🟢 V: ${m.wins} | 🔴 D: ${m.losses}</span>
+        </div>
+      </div>
+    `;
+  }).join("");
 }
 
 // Lógica de Renderização do Modal

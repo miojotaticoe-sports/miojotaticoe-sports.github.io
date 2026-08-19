@@ -13,7 +13,7 @@
   <meta property="og:image" content="logo.png" />
   <meta property="og:type" content="website" />
 
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=1.0.1" />
 </head>
 
 <body>
@@ -28,8 +28,10 @@
 
     <nav id="menu" class="menu">
       <a href="#hero">Home</a>
-      <a href="#sobre">Sobre</a>
       <a href="#jogadores">Time</a>
+      <a href="#hall-da-fama">Troféus</a>
+      <a href="#versus">Versus X1</a>
+      <a href="#mapas">Mapas</a>
       <a href="#partidas">Partidas</a>
       <a href="#vitoria">Destaque</a>
     </nav>
@@ -61,6 +63,40 @@
   <section class="section" id="jogadores">
     <h2>👥 Jogadores</h2>
     <div class="cards" id="listaJogadores"></div>
+  </section>
+
+  <!-- Hall da Fama -->
+  <section class="section" id="hall-da-fama">
+    <h2>🎖️ Hall da Fama (Destaques do Time)</h2>
+    <div class="trophy-grid" id="trophyGrid">
+      <!-- Preenchido dinamicamente pelo JS -->
+    </div>
+  </section>
+
+  <!-- Comparador X1 (Modo Versus) -->
+  <section class="section" id="versus">
+    <h2>⚔️ Comparador X1 (Modo Versus)</h2>
+    <p class="section-subtitle">Selecione dois Miojos para comparar habilidades lado a lado!</p>
+
+    <div class="versus-container">
+      <div class="versus-selectors">
+        <select id="playerSelect1" class="versus-select" onchange="compararJogadores()"></select>
+        <span class="versus-vs-badge">VS</span>
+        <select id="playerSelect2" class="versus-select" onchange="compararJogadores()"></select>
+      </div>
+
+      <div class="versus-comparison" id="versusResults">
+        <!-- Renderizado pelo JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Radar de Mapas -->
+  <section class="section" id="mapas">
+    <h2>🗺️ Pool de Mapas da Equipe</h2>
+    <div class="map-grid" id="mapGrid">
+      <!-- Preenchido dinamicamente pelo JS -->
+    </div>
   </section>
 
   <section class="section" id="partidas">
