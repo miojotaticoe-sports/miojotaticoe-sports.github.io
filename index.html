@@ -9,11 +9,19 @@
 
   <!-- Metatags Open Graph (Preview em links no WhatsApp, Discord e Redes Sociais) -->
   <meta property="og:title" content="Miojo Tático E-Sports" />
-  <meta property="og:description" content="Estatísticas oficiais e partidas da equipe Miojo Tático em tempo real via Leetify." />
+  <meta property="og:description"
+    content="Estatísticas oficiais e partidas da equipe Miojo Tático em tempo real via Leetify." />
   <meta property="og:image" content="logo.png" />
   <meta property="og:type" content="website" />
 
-  <link rel="stylesheet" href="styles.css?v=1.0.1" />
+  <!-- Google Fonts Profissionais: Outfit (Títulos) & Inter (Corpo) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=1.0.2" />
 </head>
 
 <body>
@@ -40,15 +48,23 @@
   </header>
 
   <main class="hero" id="hero">
-    <h1>Rápidos como miojo. Táticos… às vezes.</h1>
-    <p>
-      Somos um time de amigos jogando CS2 pela zoeira, caos e diversão.
-      Não prometemos vitórias, mas garantimos entretenimento.
+    <div class="hero-badge"><span class="pulse-dot"></span> ORGANIZAÇÃO OFICIAL CS2</div>
+    <h1>RÁPIDOS COMO MIOJO.<br><span class="hero-highlight">TÁTICOS... ÀS VEZES.</span></h1>
+    <p class="hero-subtext">
+      Estatísticas em tempo real, históricos de partidas, hall da fama e o caos tático da equipe de CS2 mais
+      imprevisível do Brasil.
     </p>
 
     <div class="buttons">
-      <a href="#partidas" class="btn">🔥 Ver Partidas</a>
-      <a href="#jogadores" class="btn secondary">😈 Conhecer o Time</a>
+      <a href="#partidas" class="btn btn-primary">🔥 Ver Partidas</a>
+      <a href="#jogadores" class="btn btn-secondary">👥 Conhecer o Time</a>
+      <a href="#versus" class="btn btn-tertiary">⚔️ Modo Versus</a>
+    </div>
+
+    <div class="hero-ticker">
+      <div class="ticker-item"><span>🎮 JOGO:</span> <strong>Counter-Strike 2</strong></div>
+      <div class="ticker-item"><span>⚡ API SYNC:</span> <strong>Leetify Live</strong></div>
+      <div class="ticker-item"><span>👥 ROSTER:</span> <strong>8 Integrantes</strong></div>
     </div>
   </main>
 
@@ -158,7 +174,8 @@
   <footer class="footer">
     <div class="footer-content">
       <p>© Miojo Tático E-Sports – Time amador, diversão profissional</p>
-      <a href="https://leetify.com" target="_blank" rel="noopener noreferrer" class="leetify-badge-link" title="Dados fornecidos por Leetify">
+      <a href="https://leetify.com" target="_blank" rel="noopener noreferrer" class="leetify-badge-link"
+        title="Dados fornecidos por Leetify">
         <img src="leetify-badge.png" alt="Data provided by Leetify" class="leetify-badge-img" />
       </a>
     </div>
