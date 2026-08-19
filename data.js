@@ -72,7 +72,7 @@ const siteData = {
     { id: "jersey", nome: "Jersey Oficial Cyberpunk 2026", preco: "R$ 139,90", tag: "NOVO", foto: "logo.png", status: "disponivel" },
     { id: "mousepad", nome: "Mousepad Gigante Sabor Galinha Caipira", preco: "R$ 59,90", tag: "MAIS VENDIDO", foto: "logo.png", status: "esgotado" },
     { id: "caneca", nome: "Caneca 'Chamando Tática Duvidosa'", preco: "R$ 39,90", tag: "EXCLUSIVO", foto: "logo.png", status: "disponivel" },
-    { id: "dipirona", nome: "Kit Dipirona 500mg Pós-Ranked", preco: "R$ 19,90", tag: "ESSENCIAL", foto: "logo.png", status: "disponivel" }
+    { id: "dipirona", nome: "Kit Dipirona 500mg Pós-Premier", preco: "R$ 19,90", tag: "ESSENCIAL", foto: "logo.png", status: "disponivel" }
   ],
 
   patrocinadores: [
