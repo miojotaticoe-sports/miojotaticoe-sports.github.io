@@ -1,0 +1,33 @@
+name: Update Leetify Stats
+
+on:
+  schedule:
+    - cron: '0 */4 * * *' # Executa a cada 4 horas
+  workflow_dispatch: # Permite execução manual a qualquer momento via aba Actions no GitHub!
+
+permissions:
+  contents: write
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch Leetify API Data
+        env:
+          LEETIFY_API_KEY: ${{ secrets.LEETIFY_API_KEY }}
+        run: node scripts/fetch-leetify.js
+
+      - name: Commit & Push updated player JSONs
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update Leetify player stats [skip ci]"
+          branch: main

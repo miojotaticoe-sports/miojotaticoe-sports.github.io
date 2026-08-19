@@ -19,15 +19,15 @@
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
 
     <nav id="menu" class="menu">
-      <a href="#">Home</a>
-      <a href="#">Time</a>
-      <a href="#">Partidas</a>
-      <a href="#">Loja</a>
-      <a href="#">Contato</a>
+      <a href="#hero">Home</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#jogadores">Time</a>
+      <a href="#partidas">Partidas</a>
+      <a href="#vitoria">Destaque</a>
     </nav>
   </header>
 
-  <main class="hero">
+  <main class="hero" id="hero">
     <h1>Rápidos como miojo. Táticos… às vezes.</h1>
     <p>
       Somos um time de amigos jogando CS2 pela zoeira, caos e diversão.
@@ -35,12 +35,12 @@
     </p>
 
     <div class="buttons">
-      <a href="#" class="btn">🔥 Ver Partidas</a>
-      <a href="#" class="btn secondary">😈 Conhecer o Time</a>
+      <a href="#partidas" class="btn">🔥 Ver Partidas</a>
+      <a href="#jogadores" class="btn secondary">😈 Conhecer o Time</a>
     </div>
   </main>
 
-  <section class="section">
+  <section class="section" id="sobre">
     <h2>🔥 Sobre o Time</h2>
 
     <div class="cards">
@@ -50,12 +50,28 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="jogadores">
     <h2>👥 Jogadores</h2>
     <div class="cards" id="listaJogadores"></div>
   </section>
 
-  <section class="highlight">
+  <section class="section" id="partidas">
+    <h2>⚔️ Partidas</h2>
+    <div class="matches">
+      <div class="next-match">
+        <h3>🔥 Próxima Partida</h3>
+        <p><strong>Adversário:</strong> <span id="proxAdversario"></span></p>
+        <p><strong>Data:</strong> <span id="proxData"></span></p>
+        <p><strong>Mapa:</strong> <span id="proxMapa"></span></p>
+      </div>
+      <div class="history">
+        <h3>📜 Histórico de Partidas</h3>
+        <div id="historicoPartidas"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="highlight" id="vitoria">
     <h2>🏆 Última Vitória</h2>
     <div class="score">
       <div class="team win" id="timeCasa"></div>
@@ -68,6 +84,16 @@
   <footer class="footer">
     © Miojo Tático E-Sports – Time amador, diversão profissional
   </footer>
+
+  <!-- Modal de Detalhes do Jogador -->
+  <div id="playerModal" class="modal-backdrop" onclick="fecharModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="fecharModalDirect()">&times;</button>
+      <div id="modalBody">
+        <!-- Conteúdo dinâmico renderizado pelo JS -->
+      </div>
+    </div>
+  </div>
 
   <script src="data.js"></script>
   <script src="script.js"></script>
