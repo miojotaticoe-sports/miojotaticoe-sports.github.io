@@ -8,9 +8,9 @@ const siteData = {
 
   partidas: {
     proxima: {
-      adversario: "Os Inimigos da Tática",
-      data: "Sexta-feira, 22:00",
-      mapa: "de_inferno"
+      adversario: "Aguardando oponente digno",
+      data: "A definir",
+      mapa: "A definir"
     },
     historico: [
       { resultado: "Vitória", placar: "13 - 11", adversario: "Inimigos do Clutch", mapa: "Mirage", mvp: "Vavalk" },

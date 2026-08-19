@@ -578,4 +578,39 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
+/* ===== Lineup dos Miojos em Campo ===== */
+.match-lineup {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
+
+.lineup-label {
+  color: #00ff9c;
+  font-weight: bold;
+}
+
+.lineup-player {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0, 255, 156, 0.08);
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 255, 156, 0.25);
+  color: #fff;
+  font-size: 11px;
+}
+
+.lineup-avatar {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
 

@@ -63,8 +63,10 @@ function preencherVitoria() {
   if (mvp) mvp.innerText = "MVP: " + siteData.ultimaVitoria.mvp;
 }
 
-// Preencher dados de partidas (limita às 3 últimas partidas)
-function preencherPartidas(recentMatchesFromMock) {
+const allTeamMatchesMap = new Map();
+
+// Preencher dados de partidas (próxima partida e fallback estático)
+function preencherPartidas() {
   if (!siteData || !siteData.partidas) return;
 
   if (siteData.partidas.proxima) {
@@ -76,45 +78,72 @@ function preencherPartidas(recentMatchesFromMock) {
     if (proxData) proxData.innerText = siteData.partidas.proxima.data;
     if (proxMapa) proxMapa.innerText = siteData.partidas.proxima.mapa;
   }
+}
 
+// Registrar partidas dos mocks e renderizar as 3 mais recentes com a lineup do time
+function registrarPartidasDoJogador(jogador, mockData) {
+  if (!mockData || !mockData.recent_matches) return;
+
+  mockData.recent_matches.forEach(m => {
+    if (!m.id) return;
+    if (!allTeamMatchesMap.has(m.id)) {
+      allTeamMatchesMap.set(m.id, {
+        id: m.id,
+        finished_at: m.finished_at,
+        outcome: m.outcome,
+        map_name: m.map_name,
+        score: m.score,
+        players: [{ nome: jogador.nome, foto: jogador.foto }]
+      });
+    } else {
+      const match = allTeamMatchesMap.get(m.id);
+      if (!match.players.some(p => p.nome === jogador.nome)) {
+        match.players.push({ nome: jogador.nome, foto: jogador.foto });
+      }
+    }
+  });
+
+  renderizarHistoricoEquipe();
+}
+
+function renderizarHistoricoEquipe() {
   const historicoDiv = document.getElementById("historicoPartidas");
-  if (!historicoDiv) return;
+  if (!historicoDiv || allTeamMatchesMap.size === 0) return;
 
-  // Se houver partidas reais do Leetify, ordena por data mais recente e exibe apenas as 3 últimas
-  if (recentMatchesFromMock && recentMatchesFromMock.length > 0) {
-    const sorted = [...recentMatchesFromMock].sort((a, b) => new Date(b.finished_at || 0) - new Date(a.finished_at || 0));
-    const top3 = sorted.slice(0, 3);
-    historicoDiv.innerHTML = "";
-    top3.forEach(m => {
-      let resultado = "Empate";
-      if (m.outcome === "win") resultado = "Vitória";
-      else if (m.outcome === "loss") resultado = "Derrota";
+  const sortedMatches = Array.from(allTeamMatchesMap.values())
+    .sort((a, b) => new Date(b.finished_at || 0) - new Date(a.finished_at || 0));
 
-      const placar = m.score ? `${m.score[0]} - ${m.score[1]}` : "N/A";
-      const mapa = (m.map_name || "de_unknown").replace("de_", "").replace("cs_", "");
-      const mapaFormatted = mapa.charAt(0).toUpperCase() + mapa.slice(1);
+  const top3 = sortedMatches.slice(0, 3);
+  historicoDiv.innerHTML = "";
 
-      const div = document.createElement("div");
-      div.className = "match-item";
-      div.innerHTML = `
-        <strong>${resultado}</strong> — ${placar}<br>
-        <small>Mapa: ${mapaFormatted} | Rating: ${m.leetify_rating !== undefined ? Number(m.leetify_rating).toFixed(2) : "N/A"}</small>
-      `;
-      historicoDiv.appendChild(div);
-    });
-  } else if (siteData.partidas.historico) {
-    const top3 = siteData.partidas.historico.slice(0, 3);
-    historicoDiv.innerHTML = "";
-    top3.forEach(jogo => {
-      const div = document.createElement("div");
-      div.className = "match-item";
-      div.innerHTML = `
-        <strong>${jogo.resultado}</strong> — ${jogo.placar} vs ${jogo.adversario}<br>
-        <small>Mapa: ${jogo.mapa} | MVP: ${jogo.mvp}</small>
-      `;
-      historicoDiv.appendChild(div);
-    });
-  }
+  top3.forEach(m => {
+    let resultado = "Empate";
+    if (m.outcome === "win") resultado = "Vitória";
+    else if (m.outcome === "loss") resultado = "Derrota";
+
+    const placar = m.score ? `${m.score[0]} - ${m.score[1]}` : "N/A";
+    const mapa = (m.map_name || "de_unknown").replace("de_", "").replace("cs_", "");
+    const mapaFormatted = mapa.charAt(0).toUpperCase() + mapa.slice(1);
+
+    const lineupBadges = m.players.map(p => `
+      <span class="lineup-player" title="${p.nome}">
+        <img src="${p.foto}" alt="${p.nome}" class="lineup-avatar" />
+        <span>${p.nome}</span>
+      </span>
+    `).join("");
+
+    const div = document.createElement("div");
+    div.className = "match-item";
+    div.innerHTML = `
+      <strong>${resultado}</strong> — ${placar}<br>
+      <small>Mapa: ${mapaFormatted}</small>
+      <div class="match-lineup">
+        <span class="lineup-label">👥 Miojos em campo:</span>
+        ${lineupBadges}
+      </div>
+    `;
+    historicoDiv.appendChild(div);
+  });
 }
 
 // Preencher jogadores e conectar mocks do Leetify
@@ -144,9 +173,7 @@ async function carregarJogadores() {
         }
 
         if (mockData) {
-          if (mockData.recent_matches && mockData.recent_matches.length > 0) {
-            preencherPartidas(mockData.recent_matches);
-          }
+          registrarPartidasDoJogador(jogador, mockData);
           const leetifyRating = mockData.ranks?.leetify ?? null;
           const winratePct = mockData.winrate !== undefined ? (mockData.winrate * 100).toFixed(1) + "%" : "N/A";
           const totalMatches = mockData.total_matches ?? "N/A";
