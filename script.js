@@ -175,6 +175,40 @@ function renderizarHistoricoEquipe() {
     `;
     historicoDiv.appendChild(div);
   });
+
+  // Atualizar dinamicamente a seção 'Última Vitória' se houver uma vitória mais recente nos dados do Leetify
+  const ultimaVitDinamica = sortedMatches.find(m => m.outcome === "win");
+  if (ultimaVitDinamica) {
+    const dataDinamica = new Date(ultimaVitDinamica.finished_at || 0);
+    const dataEstatica = siteData?.ultimaVitoria?.data ? new Date(siteData.ultimaVitoria.data) : new Date(0);
+
+    if (dataDinamica >= dataEstatica) {
+      const timeCasa = document.getElementById("timeCasa");
+      const placar = document.getElementById("placar");
+      const dataVitoria = document.getElementById("dataVitoria");
+      const timeFora = document.getElementById("timeFora");
+      const mvp = document.getElementById("mvp");
+
+      if (timeCasa) {
+        timeCasa.innerHTML = `<img src="logo.png" alt="Miojo Tático" class="team-logo-img" title="Miojo Tático" />`;
+      }
+      if (placar) {
+        placar.innerText = `${ultimaVitDinamica.score[0]} - ${ultimaVitDinamica.score[1]}`;
+      }
+      if (dataVitoria) {
+        const dtFormatada = formatarData(ultimaVitDinamica.finished_at);
+        const mapaName = (ultimaVitDinamica.map_name || "").replace("de_", "").replace("cs_", "").toUpperCase();
+        dataVitoria.innerHTML = `📅 ${dtFormatada} ${mapaName ? '| ' + mapaName : ''}`;
+      }
+      if (timeFora) {
+        timeFora.innerText = "Matchmaking";
+      }
+      if (mvp) {
+        const nomes = ultimaVitDinamica.players.map(p => p.nome).join(", ");
+        mvp.innerText = "Destaques: " + (nomes || "Miojo Tático");
+      }
+    }
+  }
 }
 
 // Preencher jogadores e conectar mocks do Leetify

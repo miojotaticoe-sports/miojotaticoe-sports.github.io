@@ -2,11 +2,11 @@ const siteData = {
   ultimaVitoria: {
     timeCasa: "Miojo Tático",
     logoCasa: "logo.png",
-    placar: "13 x 7",
-    timeFora: "Inimigos do Clutch",
-    logoFora: "enemy.jpg",
-    data: "2026-06-20",
-    mapa: "de_cache",
+    placar: "13 x 10",
+    timeFora: "Matchmaking",
+    logoFora: "",
+    data: "2026-08-10",
+    mapa: "de_dust2",
     mvp: "Foulen"
   },
 
