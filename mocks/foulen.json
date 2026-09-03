@@ -1184,6 +1184,7 @@
       "data_source": "gamers_club",
       "outcome": "loss",
       "rank": 9,
+      "rank_type": null,
       "map_name": "de_inferno",
       "leetify_rating": -0.0913,
       "score": [
