@@ -1,14 +1,14 @@
 {
   "privacy_mode": "public",
-  "winrate": 0.3793,
-  "total_matches": 1216,
+  "winrate": 0.3448,
+  "total_matches": 1217,
   "first_match_date": "2024-04-09T03:29:34.000Z",
   "name": "Dedos de Cheetos",
   "bans": [],
   "steam64_id": "76561199226399136",
   "id": "c56ad5c9-12cf-47ab-82d6-199a7ee9564e",
   "ranks": {
-    "leetify": -1.97,
+    "leetify": -1.83,
     "premier": 6937,
     "faceit": null,
     "faceit_elo": null,
@@ -25,7 +25,7 @@
       },
       {
         "map_name": "de_cache",
-        "rank": 3
+        "rank": 0
       },
       {
         "map_name": "de_dust2",
@@ -86,38 +86,57 @@
     ]
   },
   "rating": {
-    "aim": 26.4347,
+    "aim": 26.7629,
     "positioning": 48.4047,
-    "utility": 53.9864,
-    "clutch": 0.0589,
-    "opening": -0.0207,
-    "ct_leetify": -0.0131,
-    "t_leetify": -0.027
+    "utility": 54.9158,
+    "clutch": 0.0575,
+    "opening": -0.0165,
+    "ct_leetify": -0.0127,
+    "t_leetify": -0.0244
   },
   "stats": {
-    "accuracy_enemy_spotted": 28.0411,
-    "accuracy_head": 16.0486,
-    "counter_strafing_good_shots_ratio": 72.737,
-    "ct_opening_aggression_success_rate": 42.8831,
-    "ct_opening_duel_success_percentage": 47.4128,
-    "flashbang_hit_foe_avg_duration": 3.0079,
-    "flashbang_hit_foe_per_flashbang": 0.5774,
-    "flashbang_hit_friend_per_flashbang": 0.4123,
-    "flashbang_leading_to_kill": 3.4547,
-    "flashbang_thrown": 7.0331,
-    "he_foes_damage_avg": 8.6924,
-    "he_friends_damage_avg": 1.5736,
-    "preaim": 12.0427,
-    "reaction_time_ms": 703.723,
-    "spray_accuracy": 27.2285,
-    "t_opening_aggression_success_rate": 27.4101,
-    "t_opening_duel_success_percentage": 33.4205,
-    "traded_deaths_success_percentage": 45.5887,
-    "trade_kill_opportunities_per_round": 0.3219,
-    "trade_kills_success_percentage": 38.8637,
-    "utility_on_death_avg": 356.4286
+    "accuracy_enemy_spotted": 27.9035,
+    "accuracy_head": 16.368,
+    "counter_strafing_good_shots_ratio": 72.6026,
+    "ct_opening_aggression_success_rate": 43.1546,
+    "ct_opening_duel_success_percentage": 48.2227,
+    "flashbang_hit_foe_avg_duration": 3.0669,
+    "flashbang_hit_foe_per_flashbang": 0.6015,
+    "flashbang_hit_friend_per_flashbang": 0.4186,
+    "flashbang_leading_to_kill": 3.3725,
+    "flashbang_thrown": 7.0595,
+    "he_foes_damage_avg": 8.5824,
+    "he_friends_damage_avg": 1.5362,
+    "preaim": 11.8145,
+    "reaction_time_ms": 698.1905,
+    "spray_accuracy": 26.287,
+    "t_opening_aggression_success_rate": 26.474,
+    "t_opening_duel_success_percentage": 32.3414,
+    "traded_deaths_success_percentage": 45.9611,
+    "trade_kill_opportunities_per_round": 0.3261,
+    "trade_kills_success_percentage": 39.0153,
+    "utility_on_death_avg": 357.3333
   },
   "recent_matches": [
+    {
+      "id": "b9279388-03df-456c-9d05-192ea385ea9c",
+      "finished_at": "2026-08-28T23:09:23.000Z",
+      "data_source": "matchmaking",
+      "outcome": "loss",
+      "rank": 0,
+      "rank_type": 12,
+      "map_name": "de_cache",
+      "leetify_rating": 0.0245,
+      "score": [
+        6,
+        13
+      ],
+      "preaim": 6.07,
+      "reaction_time_ms": 516,
+      "accuracy_enemy_spotted": 25.97,
+      "accuracy_head": 25,
+      "spray_accuracy": 17.24
+    },
     {
       "id": "dbde9d21-f0f0-4a63-b503-4930dedc200f",
       "finished_at": "2026-08-15T00:20:02.000Z",
@@ -1998,25 +2017,6 @@
       "accuracy_enemy_spotted": 25,
       "accuracy_head": 7.84,
       "spray_accuracy": 26.67
-    },
-    {
-      "id": "595b8ca1-191f-4ca1-ac73-de1a8cb06747",
-      "finished_at": "2026-03-09T00:51:23.000Z",
-      "data_source": "matchmaking",
-      "outcome": "loss",
-      "rank": 6,
-      "rank_type": 12,
-      "map_name": "de_train",
-      "leetify_rating": -0.0165,
-      "score": [
-        10,
-        13
-      ],
-      "preaim": 9.94,
-      "reaction_time_ms": 727,
-      "accuracy_enemy_spotted": 34.78,
-      "accuracy_head": 10,
-      "spray_accuracy": 30.3
     }
   ],
   "recent_teammates": [
@@ -2034,11 +2034,11 @@
     },
     {
       "steam64_id": "76561198120946574",
-      "recent_matches_count": 34
+      "recent_matches_count": 33
     },
     {
       "steam64_id": "76561198020209185",
-      "recent_matches_count": 11
+      "recent_matches_count": 10
     }
   ]
 }
