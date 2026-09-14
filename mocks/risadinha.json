@@ -1,14 +1,14 @@
 {
   "privacy_mode": "public",
   "winrate": 0.3103,
-  "total_matches": 1138,
+  "total_matches": 1139,
   "first_match_date": "2024-04-28T16:36:38.000Z",
   "name": "gHost31",
   "bans": [],
   "steam64_id": "76561198241857054",
   "id": "5daee43b-21fa-4a1a-8529-fa66120c9bfe",
   "ranks": {
-    "leetify": 0.98,
+    "leetify": 0.9400000000000001,
     "premier": null,
     "faceit": null,
     "faceit_elo": null,
@@ -74,38 +74,57 @@
     ]
   },
   "rating": {
-    "aim": 35.9424,
-    "positioning": 55.567,
-    "utility": 67.4056,
-    "clutch": 0.1475,
-    "opening": -0.007,
-    "ct_leetify": 0.0119,
-    "t_leetify": 0.0075
+    "aim": 36.6928,
+    "positioning": 55.9618,
+    "utility": 68.3896,
+    "clutch": 0.1508,
+    "opening": -0.0151,
+    "ct_leetify": 0.0115,
+    "t_leetify": 0.007
   },
   "stats": {
-    "accuracy_enemy_spotted": 32.2815,
-    "accuracy_head": 14.3491,
-    "counter_strafing_good_shots_ratio": 72.5163,
-    "ct_opening_aggression_success_rate": 27.4892,
-    "ct_opening_duel_success_percentage": 35.7685,
-    "flashbang_hit_foe_avg_duration": 3.0722,
-    "flashbang_hit_foe_per_flashbang": 0.6066,
-    "flashbang_hit_friend_per_flashbang": 0.4329,
-    "flashbang_leading_to_kill": 4.2381,
-    "flashbang_thrown": 17.664,
-    "he_foes_damage_avg": 8.6786,
-    "he_friends_damage_avg": 0.148,
-    "preaim": 13.2488,
-    "reaction_time_ms": 635.2484,
-    "spray_accuracy": 32.1052,
-    "t_opening_aggression_success_rate": 47.1046,
-    "t_opening_duel_success_percentage": 46.3741,
-    "traded_deaths_success_percentage": 51.065,
-    "trade_kill_opportunities_per_round": 0.3624,
-    "trade_kills_success_percentage": 41.363,
-    "utility_on_death_avg": 264.7338
+    "accuracy_enemy_spotted": 32.4341,
+    "accuracy_head": 14.0619,
+    "counter_strafing_good_shots_ratio": 72.4821,
+    "ct_opening_aggression_success_rate": 27.5339,
+    "ct_opening_duel_success_percentage": 35.8266,
+    "flashbang_hit_foe_avg_duration": 3.085,
+    "flashbang_hit_foe_per_flashbang": 0.6114,
+    "flashbang_hit_friend_per_flashbang": 0.4124,
+    "flashbang_leading_to_kill": 4.503,
+    "flashbang_thrown": 17.4407,
+    "he_foes_damage_avg": 8.9896,
+    "he_friends_damage_avg": 0.1737,
+    "preaim": 12.9662,
+    "reaction_time_ms": 639.226,
+    "spray_accuracy": 32.4662,
+    "t_opening_aggression_success_rate": 49.512,
+    "t_opening_duel_success_percentage": 46.0973,
+    "traded_deaths_success_percentage": 50.9963,
+    "trade_kill_opportunities_per_round": 0.3571,
+    "trade_kills_success_percentage": 41.4303,
+    "utility_on_death_avg": 262.4943
   },
   "recent_matches": [
+    {
+      "id": "4505ac90-7fd7-43d3-8a0a-41380100c9c9",
+      "finished_at": "2026-09-14T21:57:48.000Z",
+      "data_source": "matchmaking",
+      "outcome": "loss",
+      "rank": 0,
+      "rank_type": 11,
+      "map_name": "de_mirage",
+      "leetify_rating": -0.0364,
+      "score": [
+        9,
+        13
+      ],
+      "preaim": 10.4,
+      "reaction_time_ms": 719,
+      "accuracy_enemy_spotted": 35.91,
+      "accuracy_head": 6.06,
+      "spray_accuracy": 48.84
+    },
     {
       "id": "525c6541-6e91-4104-b109-4d3741bbce98",
       "finished_at": "2026-09-13T23:42:10.000Z",
@@ -1986,31 +2005,12 @@
       "accuracy_enemy_spotted": 18.42,
       "accuracy_head": 13.79,
       "spray_accuracy": 0
-    },
-    {
-      "id": "179d598b-cb12-4344-910f-40ae2b05dcdb",
-      "finished_at": "2026-03-20T22:22:14.000Z",
-      "data_source": "matchmaking",
-      "outcome": "loss",
-      "rank": 4,
-      "rank_type": 12,
-      "map_name": "de_dust2",
-      "leetify_rating": -0.0576,
-      "score": [
-        9,
-        13
-      ],
-      "preaim": 18.45,
-      "reaction_time_ms": 625,
-      "accuracy_enemy_spotted": 28.25,
-      "accuracy_head": 15.69,
-      "spray_accuracy": 16.67
     }
   ],
   "recent_teammates": [
     {
       "steam64_id": "76561199226399136",
-      "recent_matches_count": 68
+      "recent_matches_count": 69
     },
     {
       "steam64_id": "76561198196276253",
