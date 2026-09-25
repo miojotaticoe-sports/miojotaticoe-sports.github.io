@@ -1,8 +1,3 @@
-# Environment files
-.env
-.env.local
-.env.*.local
-
 # OS generated files
 .DS_Store
 Thumbs.db
@@ -12,4 +7,3 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
-
