@@ -37,6 +37,7 @@
     <nav id="menu" class="menu">
       <a href="#hero">Home</a>
       <a href="#jogadores">Time</a>
+      <a href="#clipes">Clipes</a>
       <a href="#hall-da-fama">Troféus</a>
       <a href="#noticias">Notícias</a>
       <a href="#loja">Loja</a>
@@ -81,6 +82,18 @@
   <section class="section" id="jogadores">
     <h2>👥 Jogadores</h2>
     <div class="cards" id="listaJogadores"></div>
+  </section>
+
+  <!-- Clipes & Destaques Allstar.gg -->
+  <section class="section" id="clipes">
+    <div class="section-tag-badge">⭐ ALLSTAR.GG HIGHLIGHTS</div>
+    <h2>🎬 Clipes & Momentos Épicos</h2>
+    <p class="section-subtitle">
+      1 jogada de destaque para cada um dos nossos jogadores, sincronizada via Allstar Partner API.
+    </p>
+    <div class="clips-grid" id="clipsGrid">
+      <!-- Preenchido dinamicamente pelo JS -->
+    </div>
   </section>
 
   <!-- Hall da Fama -->
@@ -186,6 +199,16 @@
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="modal-close" onclick="fecharModalDirect()">&times;</button>
       <div id="modalBody">
+        <!-- Conteúdo dinâmico renderizado pelo JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Vídeo / Clipes Allstar -->
+  <div id="videoModal" class="modal-backdrop" onclick="fecharVideoModal(event)">
+    <div class="modal-content video-modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="fecharVideoModalDirect()">&times;</button>
+      <div id="videoModalBody">
         <!-- Conteúdo dinâmico renderizado pelo JS -->
       </div>
     </div>

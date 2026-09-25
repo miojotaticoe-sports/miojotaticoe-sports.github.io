@@ -1,4 +1,5 @@
 const mockCache = {};
+let clipsCache = {};
 
 function toggleMenu() {
   const menu = document.getElementById("menu");
@@ -276,12 +277,18 @@ async function carregarJogadores() {
       ? `<a href="https://leetify.com/app/profile/${targetId}" target="_blank" rel="noopener noreferrer" class="leetify-data-link" onclick="event.stopPropagation()">View on Leetify ↗</a>`
       : "";
 
+    const hasClip = clipsCache && clipsCache[jogador.nome];
+    const clipBadgeHtml = hasClip
+      ? `<button class="btn-card-clip" onclick="event.stopPropagation(); abrirVideoModalPorNome('${jogador.nome}')" title="Assistir clipe Allstar de ${jogador.nome}">🎬 Clipe Allstar</button>`
+      : "";
+
     div.innerHTML = `
       <img src="${jogador.foto}" alt="Foto de ${jogador.nome}" class="avatar" />
       <strong class="player-name">${jogador.nome}</strong><br>
       <small class="player-role">${jogador.funcao}</small>
       <div class="status">${jogador.status}</div>
       ${statsHtml}
+      ${clipBadgeHtml}
       ${leetifyLinkHtml}
       <div class="click-hint">🔍 Clique para detalhes</div>
     `;
@@ -721,6 +728,32 @@ function abrirModalJogador(jogador, mockData) {
     ? `<a href="https://leetify.com/app/profile/${targetId}" target="_blank" rel="noopener noreferrer" class="leetify-data-link" style="margin-top: 6px;">View on Leetify ↗</a>`
     : "";
 
+  const jogadorClip = clipsCache && clipsCache[jogador.nome];
+  let clipSectionHtml = "";
+  if (jogadorClip) {
+    const thumb = jogadorClip.snapshotUrl || jogadorClip.thumbUrl || jogador.foto;
+    const mapTag = jogadorClip.metadata?.map ? `<span class="clip-tag tag-map">🗺️ ${jogadorClip.metadata.map}</span>` : "";
+    const weaponTag = jogadorClip.metadata?.weapon ? `<span class="clip-tag tag-weapon">🔫 ${jogadorClip.metadata.weapon}</span>` : "";
+    const killTag = jogadorClip.metadata?.killCount ? `<span class="clip-tag tag-kills">💀 ${jogadorClip.metadata.killCount} Kills</span>` : "";
+
+    clipSectionHtml = `
+      <div class="modal-section-title">🎬 Clipe em Destaque (Allstar.gg)</div>
+      <div class="modal-clip-card" onclick="abrirVideoModalPorNome('${jogador.nome}')">
+        <div class="modal-clip-thumb-wrap">
+          <img src="${thumb}" class="modal-clip-thumb" alt="${jogadorClip.title}" />
+          <div class="modal-clip-play-icon">▶</div>
+        </div>
+        <div class="modal-clip-info">
+          <strong>${jogadorClip.title}</strong>
+          <div class="modal-clip-tags">
+            ${mapTag} ${weaponTag} ${killTag}
+          </div>
+          <small class="modal-clip-hint">▶ Clique para reproduzir com áudio e controles</small>
+        </div>
+      </div>
+    `;
+  }
+
   modalBody.innerHTML = `
     <div class="modal-header-info">
       <img src="${jogador.foto}" alt="${jogador.nome}" class="modal-avatar" />
@@ -732,6 +765,7 @@ function abrirModalJogador(jogador, mockData) {
       </div>
     </div>
     ${ratingsSection}
+    ${clipSectionHtml}
     ${keyStatsGrid}
     ${recentMatchesHtml}
   `;
@@ -750,18 +784,203 @@ function fecharModal(event) {
   }
 }
 
+// ===== Sistema de Clipes Allstar.gg =====
+async function carregarClipes() {
+  const clipsGrid = document.getElementById("clipsGrid");
+
+  try {
+    const res = await fetch(`mocks/clips.json?t=${Date.now()}`);
+    if (res.ok) {
+      const data = await res.json();
+      clipsCache = data.clips || {};
+    }
+  } catch (err) {
+    console.warn("Não foi possível carregar mocks/clips.json:", err);
+  }
+
+  if (clipsGrid) {
+    renderizarGridClipes();
+  }
+}
+
+function renderizarGridClipes() {
+  const clipsGrid = document.getElementById("clipsGrid");
+  if (!clipsGrid || !siteData?.jogadores) return;
+
+  clipsGrid.innerHTML = "";
+
+  siteData.jogadores.forEach(jogador => {
+    const clip = clipsCache[jogador.nome];
+    const card = document.createElement("div");
+    card.className = "clip-card";
+
+    if (clip) {
+      const thumb = clip.snapshotUrl || clip.thumbUrl || jogador.foto;
+      const mapName = clip.metadata?.map || "";
+      const weapon = clip.metadata?.weapon || "";
+      const kills = clip.metadata?.killCount ? `${clip.metadata.killCount} Kills` : "";
+      const hs = clip.metadata?.headshots ? `${clip.metadata.headshots} HS` : "";
+      const duration = clip.length ? `${clip.length}s` : "";
+
+      card.innerHTML = `
+        <div class="clip-thumbnail-wrapper" onclick="abrirVideoModalPorNome('${jogador.nome}')">
+          <img src="${thumb}" alt="${clip.title}" class="clip-thumbnail" loading="lazy" />
+          <div class="clip-overlay">
+            <div class="clip-play-btn">
+              <span class="clip-play-icon">▶</span>
+            </div>
+          </div>
+          ${duration ? `<span class="clip-badge-duration">⏱️ ${duration}</span>` : ""}
+          ${clip.round ? `<span class="clip-badge-round">R${clip.round}</span>` : ""}
+        </div>
+
+        <div class="clip-content">
+          <div class="clip-author-row">
+            <img src="${jogador.foto}" alt="${jogador.nome}" class="clip-author-avatar" />
+            <div class="clip-author-meta">
+              <strong class="clip-author-name">${jogador.nome}</strong>
+              <small class="clip-author-role">${jogador.funcao}</small>
+            </div>
+            <span class="clip-partner-tag">CS2</span>
+          </div>
+
+          <h3 class="clip-card-title" title="${clip.title}">${clip.title}</h3>
+
+          <div class="clip-tags-row">
+            ${mapName ? `<span class="clip-tag tag-map">🗺️ ${mapName}</span>` : ""}
+            ${weapon ? `<span class="clip-tag tag-weapon">🔫 ${weapon}</span>` : ""}
+            ${kills ? `<span class="clip-tag tag-kills">💀 ${kills}</span>` : ""}
+            ${hs ? `<span class="clip-tag tag-hs">🎯 ${hs}</span>` : ""}
+          </div>
+
+          <div class="clip-footer-actions">
+            <button class="btn-watch-clip" onclick="abrirVideoModalPorNome('${jogador.nome}')">
+              ▶ Assistir Clipe
+            </button>
+            <a href="${clip.clipUrl}" target="_blank" rel="noopener noreferrer" class="clip-allstar-link" title="Abrir no Allstar">
+              ↗
+            </a>
+          </div>
+        </div>
+      `;
+    } else {
+      card.classList.add("clip-card-empty");
+      card.innerHTML = `
+        <div class="clip-empty-wrapper">
+          <img src="${jogador.foto}" alt="${jogador.nome}" class="clip-empty-avatar" />
+          <strong class="clip-author-name">${jogador.nome}</strong>
+          <small class="clip-author-role">${jogador.funcao}</small>
+          <p class="clip-empty-msg">Aguardando clipe no Allstar.gg...</p>
+        </div>
+      `;
+    }
+
+    clipsGrid.appendChild(card);
+  });
+}
+
+function abrirVideoModalPorNome(nomeJogador) {
+  const jogador = siteData?.jogadores?.find(j => j.nome === nomeJogador);
+  const clip = clipsCache && clipsCache[nomeJogador];
+  if (clip) {
+    abrirVideoModal(clip, jogador);
+  } else if (jogador) {
+    alert(`Ainda não há clipe disponível no Allstar para ${jogador.nome}.`);
+  }
+}
+
+function abrirVideoModal(clip, jogador) {
+  const modal = document.getElementById("videoModal");
+  const body = document.getElementById("videoModalBody");
+  if (!modal || !body || !clip) return;
+
+  const url = clip.clipUrl || "";
+  let playerHtml = "";
+
+  if (url.endsWith(".mp4") || url.endsWith(".webm")) {
+    playerHtml = `
+      <video src="${url}" controls autoplay playsinline class="video-player-frame" poster="${clip.snapshotUrl || clip.thumbUrl || ''}"></video>
+    `;
+  } else {
+    let embedUrl = url;
+    if (embedUrl.includes("allstar.gg/clip/")) {
+      const parts = embedUrl.split("/clip/");
+      const clipId = parts[1].split("?")[0];
+      embedUrl = `https://allstar.gg/iframe?clip=${clipId}`;
+    } else if (!embedUrl.includes("allstar.gg/iframe") && embedUrl.includes("allstar.gg")) {
+      const queryClip = new URLSearchParams(embedUrl.split("?")[1] || "").get("clip");
+      if (queryClip) {
+        embedUrl = `https://allstar.gg/iframe?clip=${queryClip}`;
+      }
+    }
+    const separator = embedUrl.includes("?") ? "&" : "?";
+    playerHtml = `
+      <iframe src="${embedUrl}${separator}autoplay=1" frameborder="0" allowfullscreen allow="autoplay; fullscreen" class="video-player-frame"></iframe>
+    `;
+  }
+
+  const dtFormatada = clip.createdDate ? formatarData(clip.createdDate) : "";
+
+  body.innerHTML = `
+    <div class="video-player-container">
+      ${playerHtml}
+    </div>
+    <div class="video-details-header">
+      <div class="video-player-author">
+        <img src="${jogador?.foto || clip.playerFoto || 'logo.png'}" class="video-author-avatar" alt="${jogador?.nome || clip.playerName}" />
+        <div>
+          <h3 class="video-clip-title">${clip.title}</h3>
+          <div class="video-clip-subtitle">
+            <strong>${jogador?.nome || clip.playerName}</strong> (${jogador?.funcao || clip.playerRole || 'Player'})
+            ${dtFormatada ? ' • 📅 ' + dtFormatada : ''}
+          </div>
+        </div>
+      </div>
+      <a href="${clip.clipUrl}" target="_blank" rel="noopener noreferrer" class="btn-allstar-link">
+        Abrir no Allstar.gg ↗
+      </a>
+    </div>
+    <div class="video-meta-pills">
+      ${clip.metadata?.map ? `<span class="video-pill">🗺️ Mapa: <strong>${clip.metadata.map}</strong></span>` : ''}
+      ${clip.metadata?.weapon ? `<span class="video-pill">🔫 Arma: <strong>${clip.metadata.weapon}</strong></span>` : ''}
+      ${clip.metadata?.killCount ? `<span class="video-pill">💀 Kills: <strong>${clip.metadata.killCount}</strong></span>` : ''}
+      ${clip.metadata?.headshots ? `<span class="video-pill">🎯 HS: <strong>${clip.metadata.headshots}</strong></span>` : ''}
+      ${clip.metadata?.situation ? `<span class="video-pill">⚡ <strong>${clip.metadata.situation}</strong></span>` : ''}
+      ${clip.round ? `<span class="video-pill">⏱️ Round: <strong>${clip.round}</strong></span>` : ''}
+      ${clip.length ? `<span class="video-pill">⏳ Duração: <strong>${clip.length}s</strong></span>` : ''}
+    </div>
+  `;
+
+  modal.classList.add("show");
+}
+
+function fecharVideoModalDirect() {
+  const modal = document.getElementById("videoModal");
+  const body = document.getElementById("videoModalBody");
+  if (body) body.innerHTML = "";
+  if (modal) modal.classList.remove("show");
+}
+
+function fecharVideoModal(event) {
+  if (event.target.id === "videoModal") {
+    fecharVideoModalDirect();
+  }
+}
+
 // Fechar com tecla ESC
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     fecharModalDirect();
+    fecharVideoModalDirect();
   }
 });
 
 // Inicializar na carga da página
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   preencherVitoria();
   preencherPartidas();
-  carregarJogadores();
+  await carregarClipes();
+  await carregarJogadores();
   renderizarNoticias();
   renderizarLoja();
   renderizarPatrocinadores();

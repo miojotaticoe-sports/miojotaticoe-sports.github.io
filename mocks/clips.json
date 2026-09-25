@@ -1,0 +1,181 @@
+{
+  "updatedAt": "2026-09-24T21:40:00.000Z",
+  "clips": {
+    "Foulen": {
+      "id": "clip_foulen_1",
+      "clipUrl": "https://allstar.gg/iframe?clip=foulen_awp_clutch",
+      "shareId": "foulen_awp_clutch",
+      "title": "AWP 4K Clutch no Bombsite A",
+      "snapshotUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80",
+      "thumbUrl": "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=80",
+      "length": 18,
+      "round": 12,
+      "createdDate": "2026-09-20T22:15:00.000Z",
+      "metadata": {
+        "map": "Mirage",
+        "weapon": "AWP",
+        "killCount": "4",
+        "headshots": "2",
+        "situation": "1v4 Clutch"
+      },
+      "playerName": "Foulen",
+      "playerFoto": "avatars/foulen.png",
+      "playerRole": "AWP",
+      "steamId": "76561198402512698"
+    },
+    "Lucão": {
+      "id": "clip_lucao_1",
+      "clipUrl": "https://allstar.gg/iframe?clip=lucao_deagle_3k",
+      "shareId": "lucao_deagle_3k",
+      "title": "Deagle 3 Taps no Meio (Tática Duvidosa)",
+      "snapshotUrl": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800&q=80",
+      "thumbUrl": "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=400&q=80",
+      "length": 15,
+      "round": 8,
+      "createdDate": "2026-09-18T20:30:00.000Z",
+      "metadata": {
+        "map": "Dust II",
+        "weapon": "Desert Eagle",
+        "killCount": "3",
+        "headshots": "3",
+        "situation": "Eco Round"
+      },
+      "playerName": "Lucão",
+      "playerFoto": "avatars/lucao.png",
+      "playerRole": "IGL",
+      "steamId": "76561198020209185"
+    },
+    "Vavalk": {
+      "id": "clip_vavalk_1",
+      "clipUrl": "https://allstar.gg/iframe?clip=vavalk_ak_spray",
+      "shareId": "vavalk_ak_spray",
+      "title": "Spray Transfer 3K na Rampa",
+      "snapshotUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+      "thumbUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80",
+      "length": 14,
+      "round": 15,
+      "createdDate": "2026-09-19T23:05:00.000Z",
+      "metadata": {
+        "map": "Nuke",
+        "weapon": "AK-47",
+        "killCount": "3",
+        "headshots": "2",
+        "situation": "Spray Transfer"
+      },
+      "playerName": "Vavalk",
+      "playerFoto": "avatars/vavalk.png",
+      "playerRole": "Support",
+      "steamId": "76561199679487431"
+    },
+    "Ostaquinho": {
+      "id": "clip_ostaquinho_1",
+      "clipUrl": "https://allstar.gg/iframe?clip=ostaquinho_p90_rush",
+      "shareId": "ostaquinho_p90_rush",
+      "title": "P90 W+M1 na Banana",
+      "snapshotUrl": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=800&q=80",
+      "thumbUrl": "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=400&q=80",
+      "length": 16,
+      "round": 6,
+      "createdDate": "2026-09-17T21:40:00.000Z",
+      "metadata": {
+        "map": "Inferno",
+        "weapon": "P90",
+        "killCount": "3",
+        "headshots": "1",
+        "situation": "Rush Banana"
+      },
+      "playerName": "Ostaquinho",
+      "playerFoto": "avatars/ostaquinho.png",
+      "playerRole": "Support",
+      "steamId": "76561199226399136"
+    },
+    "Angeli": {
+      "id": "clip_angeli_1",
+      "clipUrl": "https://allstar.gg/iframe?clip=angeli_entry_m4",
+      "shareId": "angeli_entry_m4",
+      "title": "Entry Fragger Limpando o Bomb B",
+      "snapshotUrl": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=800&q=80",
+      "thumbUrl": "https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=400&q=80",
+      "length": 12,
+      "round": 4,
+      "createdDate": "2026-09-15T19:10:00.000Z",
+      "metadata": {
+        "map": "Ancient",
+        "weapon": "M4A1-S",
+        "killCount": "3",
+        "headshots": "2",
+        "situation": "Entry Fragger"
+      },
+      "playerName": "Angeli",
+      "playerFoto": "avatars/angeli.png",
+      "playerRole": "Entry Fragger",
+      "steamId": "76561198083071115"
+    },
+    "Andersono": {
+      "id": "clip_andersono_1",
+      "clipUrl": "https://allstar.gg/iframe?clip=andersono_galil_ace",
+      "shareId": "andersono_galil_ace",
+      "title": "Suporte Caótico garantindo o Round",
+      "snapshotUrl": "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&w=800&q=80",
+      "thumbUrl": "https://images.unsplash.com/photo-1579373903781-fd5c0c30c4cd?auto=format&fit=crop&w=400&q=80",
+      "length": 19,
+      "round": 11,
+      "createdDate": "2026-09-14T22:50:00.000Z",
+      "metadata": {
+        "map": "Anubis",
+        "weapon": "Galil AR",
+        "killCount": "4",
+        "headshots": "1",
+        "situation": "Defesa Caótica"
+      },
+      "playerName": "Andersono",
+      "playerFoto": "avatars/andersono.png",
+      "playerRole": "Support",
+      "steamId": "76561198063443948"
+    },
+    "Mouse Face": {
+      "id": "clip_mouseface_1",
+      "clipUrl": "https://allstar.gg/iframe?clip=wendnel_mac10_rush",
+      "shareId": "wendnel_mac10_rush",
+      "title": "Rush Sem Pensar nos Conectores",
+      "snapshotUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80",
+      "thumbUrl": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=400&q=80",
+      "length": 13,
+      "round": 9,
+      "createdDate": "2026-09-16T21:00:00.000Z",
+      "metadata": {
+        "map": "Overpass",
+        "weapon": "MAC-10",
+        "killCount": "2",
+        "headshots": "1",
+        "situation": "Fast Rush"
+      },
+      "playerName": "Mouse Face",
+      "playerFoto": "avatars/wendnel.png",
+      "playerRole": "Support",
+      "steamId": "76561199014407329"
+    },
+    "Risadinha": {
+      "id": "clip_risadinha_1",
+      "clipUrl": "https://allstar.gg/iframe?clip=risadinha_lurk_clutch",
+      "shareId": "risadinha_lurk_clutch",
+      "title": "Lurk Silencioso 1v2 na Rampa",
+      "snapshotUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80",
+      "thumbUrl": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80",
+      "length": 17,
+      "round": 14,
+      "createdDate": "2026-09-13T20:15:00.000Z",
+      "metadata": {
+        "map": "Vertigo",
+        "weapon": "USP-S",
+        "killCount": "2",
+        "headshots": "2",
+        "situation": "1v2 Ninja Lurk"
+      },
+      "playerName": "Risadinha",
+      "playerFoto": "avatars/risadinha.png",
+      "playerRole": "Support",
+      "steamId": "76561198241857054"
+    }
+  }
+}
