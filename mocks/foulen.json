@@ -1,15 +1,15 @@
 {
   "privacy_mode": "public",
   "winrate": 0.4286,
-  "total_matches": 1218,
+  "total_matches": 1219,
   "first_match_date": "2021-01-30T22:18:28.000Z",
   "name": "❟❛❟FaLLenAngeL",
   "bans": [],
   "steam64_id": "76561198402512698",
   "id": "9fd199fb-5468-4cf0-93de-728b4de0b112",
   "ranks": {
-    "leetify": -3.2800000000000002,
-    "premier": 17634,
+    "leetify": -3.1399999999999997,
+    "premier": 17266,
     "faceit": 3,
     "faceit_elo": 757,
     "wingman": 8,
@@ -82,38 +82,57 @@
     ]
   },
   "rating": {
-    "aim": 48.4047,
-    "positioning": 42.074,
-    "utility": 31.1393,
+    "aim": 46.4144,
+    "positioning": 42.8576,
+    "utility": 30.4553,
     "clutch": 0.0631,
-    "opening": -0.0302,
-    "ct_leetify": -0.0356,
-    "t_leetify": -0.0297
+    "opening": -0.032,
+    "ct_leetify": -0.0348,
+    "t_leetify": -0.0278
   },
   "stats": {
-    "accuracy_enemy_spotted": 27.8305,
-    "accuracy_head": 15.8053,
-    "counter_strafing_good_shots_ratio": 76.7096,
-    "ct_opening_aggression_success_rate": 38.0297,
-    "ct_opening_duel_success_percentage": 35.8773,
-    "flashbang_hit_foe_avg_duration": 1.8856,
-    "flashbang_hit_foe_per_flashbang": 0.3609,
-    "flashbang_hit_friend_per_flashbang": 0.2993,
-    "flashbang_leading_to_kill": 3.3938,
-    "flashbang_thrown": 5.2496,
-    "he_foes_damage_avg": 4.6012,
-    "he_friends_damage_avg": 0.4173,
-    "preaim": 10.6547,
-    "reaction_time_ms": 558.0451,
-    "spray_accuracy": 30.0707,
-    "t_opening_aggression_success_rate": 36.527,
-    "t_opening_duel_success_percentage": 30.9579,
-    "traded_deaths_success_percentage": 55.3929,
-    "trade_kill_opportunities_per_round": 0.2492,
-    "trade_kills_success_percentage": 33.4311,
-    "utility_on_death_avg": 266.4589
+    "accuracy_enemy_spotted": 27.3841,
+    "accuracy_head": 15.6748,
+    "counter_strafing_good_shots_ratio": 76.2627,
+    "ct_opening_aggression_success_rate": 37.8468,
+    "ct_opening_duel_success_percentage": 35.7048,
+    "flashbang_hit_foe_avg_duration": 1.8677,
+    "flashbang_hit_foe_per_flashbang": 0.3675,
+    "flashbang_hit_friend_per_flashbang": 0.3104,
+    "flashbang_leading_to_kill": 3.3775,
+    "flashbang_thrown": 5.3349,
+    "he_foes_damage_avg": 4.2031,
+    "he_friends_damage_avg": 0.4153,
+    "preaim": 10.8768,
+    "reaction_time_ms": 558.0529,
+    "spray_accuracy": 29.9946,
+    "t_opening_aggression_success_rate": 36.3514,
+    "t_opening_duel_success_percentage": 30.8091,
+    "traded_deaths_success_percentage": 55.2201,
+    "trade_kill_opportunities_per_round": 0.2592,
+    "trade_kills_success_percentage": 33.3325,
+    "utility_on_death_avg": 269.6635
   },
   "recent_matches": [
+    {
+      "id": "a604ce15-1f18-4d84-956e-30b9582c4204",
+      "finished_at": "2026-10-02T04:11:31.000Z",
+      "data_source": "matchmaking",
+      "outcome": "loss",
+      "rank": 17266,
+      "rank_type": 11,
+      "map_name": "de_dust2",
+      "leetify_rating": -0.0186,
+      "score": [
+        7,
+        13
+      ],
+      "preaim": 12.93,
+      "reaction_time_ms": 469,
+      "accuracy_enemy_spotted": 29.05,
+      "accuracy_head": 11.9,
+      "spray_accuracy": 26.42
+    },
     {
       "id": "0b4543cb-3e85-4d64-9f91-ab04a1758d23",
       "finished_at": "2026-10-02T03:37:48.000Z",
@@ -1993,31 +2012,12 @@
       "accuracy_enemy_spotted": 32.67,
       "accuracy_head": 10.81,
       "spray_accuracy": 37.08
-    },
-    {
-      "id": "a0f2057b-ec58-4b39-8f64-f17da0f869af",
-      "finished_at": "2026-04-06T00:57:54.000Z",
-      "data_source": "matchmaking",
-      "outcome": "loss",
-      "rank": 9876,
-      "rank_type": 11,
-      "map_name": "de_inferno",
-      "leetify_rating": 0.0314,
-      "score": [
-        4,
-        13
-      ],
-      "preaim": 11.79,
-      "reaction_time_ms": 547,
-      "accuracy_enemy_spotted": 26.87,
-      "accuracy_head": 14.55,
-      "spray_accuracy": 22.58
     }
   ],
   "recent_teammates": [
     {
       "steam64_id": "76561199226399136",
-      "recent_matches_count": 12
+      "recent_matches_count": 11
     }
   ]
 }
