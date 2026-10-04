@@ -29,8 +29,8 @@ const siteData = {
     { nome: "Ostaquinho", funcao: "Support", foto: "avatars/ostaquinho.png", status: "Teclado engordurado", mockFile: "mocks/ostaquinho.json", leetifyId: "c56ad5c9-12cf-47ab-82d6-199a7ee9564e", steam64_id: "76561199226399136" },
     { nome: "Foulen", funcao: "AWP", foto: "avatars/foulen.png", status: "Leite Ninho", mockFile: "mocks/foulen.json", leetifyId: "9fd199fb-5468-4cf0-93de-728b4de0b112", steam64_id: "76561198402512698" },
     { nome: "Lucão", funcao: "IGL", foto: "avatars/lucao.png", status: "Chamando tática duvidosa", mockFile: "mocks/lucao.json", leetifyId: "d0df4f97-0022-49c7-9f23-0dc971afec3e", steam64_id: "76561198020209185" },
-    { nome: "Mouse Face", funcao: "Support", foto: "avatars/wendnel.png", status: "Rushando sem pensar", mockFile: "mocks/wendnel.json", leetifyId: "ff4ed643-9df7-4956-b3c6-fcf3cf743e15", steam64_id: "76561199014407329" },
-    { nome: "Vavalk", funcao: "Support", foto: "avatars/vavalk.png", status: "Trabalhando", mockFile: "mocks/vavalk.json", leetifyId: "6a10c899-60d6-4eee-8e0d-ddc5596d26cd", steam64_id: "76561199679487431" },
+    { nome: "Mouse Face", funcao: "Support", foto: "avatars/wendnel.png", status: "IGL de 5 segundos", mockFile: "mocks/wendnel.json", leetifyId: "ff4ed643-9df7-4956-b3c6-fcf3cf743e15", steam64_id: "76561199014407329" },
+    { nome: "Vavalk", funcao: "Support", foto: "avatars/vavalk.png", status: "Protegendo do perigo", mockFile: "mocks/vavalk.json", leetifyId: "6a10c899-60d6-4eee-8e0d-ddc5596d26cd", steam64_id: "76561199679487431" },
     { nome: "Risadinha", funcao: "Support", foto: "avatars/risadinha.png", status: "Lurker", mockFile: "mocks/risadinha.json", leetifyId: "5daee43b-21fa-4a1a-8529-fa66120c9bfe", steam64_id: "76561198241857054" }
   ],
 
