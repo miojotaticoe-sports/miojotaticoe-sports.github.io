@@ -1,7 +1,7 @@
 {
   "privacy_mode": "public",
   "winrate": 0.3448,
-  "total_matches": 1161,
+  "total_matches": 1164,
   "first_match_date": "2024-04-28T16:36:38.000Z",
   "name": "gHost31",
   "bans": [],
@@ -74,38 +74,95 @@
     ]
   },
   "rating": {
-    "aim": 27.7595,
-    "positioning": 46.4144,
-    "utility": 59.2327,
-    "clutch": 0.0957,
+    "aim": 29.4598,
+    "positioning": 46.0172,
+    "utility": 60.1168,
+    "clutch": 0.1062,
     "opening": -0.0182,
-    "ct_leetify": 0.0065,
-    "t_leetify": -0.0208
+    "ct_leetify": 0.0013,
+    "t_leetify": -0.0168
   },
   "stats": {
-    "accuracy_enemy_spotted": 28.9794,
-    "accuracy_head": 14.2307,
-    "counter_strafing_good_shots_ratio": 63.3025,
+    "accuracy_enemy_spotted": 29.1693,
+    "accuracy_head": 14.1095,
+    "counter_strafing_good_shots_ratio": 64.0883,
     "ct_opening_aggression_success_rate": 39.3673,
-    "ct_opening_duel_success_percentage": 40.6562,
-    "flashbang_hit_foe_avg_duration": 2.9011,
-    "flashbang_hit_foe_per_flashbang": 0.5297,
-    "flashbang_hit_friend_per_flashbang": 0.4356,
-    "flashbang_leading_to_kill": 4.5701,
-    "flashbang_thrown": 16.1705,
-    "he_foes_damage_avg": 6.7466,
-    "he_friends_damage_avg": 0.2345,
-    "preaim": 13.3271,
-    "reaction_time_ms": 612.4446,
-    "spray_accuracy": 33.9673,
-    "t_opening_aggression_success_rate": 44.9033,
-    "t_opening_duel_success_percentage": 36.4384,
-    "traded_deaths_success_percentage": 37.2429,
-    "trade_kill_opportunities_per_round": 0.3091,
-    "trade_kills_success_percentage": 37.1143,
-    "utility_on_death_avg": 298.4429
+    "ct_opening_duel_success_percentage": 35.0323,
+    "flashbang_hit_foe_avg_duration": 2.8912,
+    "flashbang_hit_foe_per_flashbang": 0.5287,
+    "flashbang_hit_friend_per_flashbang": 0.4441,
+    "flashbang_leading_to_kill": 4.682,
+    "flashbang_thrown": 16.1775,
+    "he_foes_damage_avg": 7.5695,
+    "he_friends_damage_avg": 0.2924,
+    "preaim": 13.272,
+    "reaction_time_ms": 606.7663,
+    "spray_accuracy": 34.7074,
+    "t_opening_aggression_success_rate": 50.3515,
+    "t_opening_duel_success_percentage": 39.9094,
+    "traded_deaths_success_percentage": 36.2822,
+    "trade_kill_opportunities_per_round": 0.3072,
+    "trade_kills_success_percentage": 33.8777,
+    "utility_on_death_avg": 292.6116
   },
   "recent_matches": [
+    {
+      "id": "9a8658cd-46e1-4000-a5e1-7016f2ad8552",
+      "finished_at": "2026-10-08T01:23:48.000Z",
+      "data_source": "matchmaking",
+      "outcome": "loss",
+      "rank": 0,
+      "rank_type": 12,
+      "map_name": "de_anubis",
+      "leetify_rating": 0.1037,
+      "score": [
+        3,
+        13
+      ],
+      "preaim": 12.81,
+      "reaction_time_ms": 484,
+      "accuracy_enemy_spotted": 28.85,
+      "accuracy_head": 16.67,
+      "spray_accuracy": 50
+    },
+    {
+      "id": "64659805-992d-4108-b200-bf389d52c13c",
+      "finished_at": "2026-10-08T00:50:25.000Z",
+      "data_source": "matchmaking",
+      "outcome": "loss",
+      "rank": 0,
+      "rank_type": 12,
+      "map_name": "de_anubis",
+      "leetify_rating": -0.0607,
+      "score": [
+        2,
+        13
+      ],
+      "preaim": 11.08,
+      "reaction_time_ms": 734,
+      "accuracy_enemy_spotted": 31.25,
+      "accuracy_head": 6.06,
+      "spray_accuracy": 38.64
+    },
+    {
+      "id": "9e612e76-ddd3-43ba-bc4d-888d7689a64a",
+      "finished_at": "2026-10-08T00:02:06.000Z",
+      "data_source": "matchmaking",
+      "outcome": "loss",
+      "rank": 4,
+      "rank_type": 12,
+      "map_name": "de_train",
+      "leetify_rating": -0.0572,
+      "score": [
+        7,
+        13
+      ],
+      "preaim": 15.75,
+      "reaction_time_ms": 531,
+      "accuracy_enemy_spotted": 24.74,
+      "accuracy_head": 20,
+      "spray_accuracy": 28
+    },
     {
       "id": "f545fee7-0ed6-44d8-9213-e00a40de316e",
       "finished_at": "2026-10-05T01:59:42.000Z",
@@ -1948,73 +2005,20 @@
       "accuracy_enemy_spotted": 36.32,
       "accuracy_head": 16.67,
       "spray_accuracy": 28.57
-    },
-    {
-      "id": "9412d150-3715-4570-b88d-eb7d6c610564",
-      "finished_at": "2026-04-08T18:26:22.000Z",
-      "data_source": "matchmaking",
-      "outcome": "win",
-      "rank": 8703,
-      "rank_type": 11,
-      "map_name": "de_mirage",
-      "leetify_rating": 0.0768,
-      "score": [
-        13,
-        8
-      ],
-      "preaim": 11.35,
-      "reaction_time_ms": 750,
-      "accuracy_enemy_spotted": 31.4,
-      "accuracy_head": 8,
-      "spray_accuracy": 35.29
-    },
-    {
-      "id": "aae7b2e9-9a57-47d6-9818-8caeaec28321",
-      "finished_at": "2026-04-08T03:25:13.000Z",
-      "data_source": "matchmaking",
-      "outcome": "loss",
-      "rank": 7,
-      "rank_type": 12,
-      "map_name": "de_anubis",
-      "leetify_rating": -0.036,
-      "score": [
-        3,
-        13
-      ],
-      "preaim": 12.44,
-      "reaction_time_ms": 875,
-      "accuracy_enemy_spotted": 18.8,
-      "accuracy_head": 17.86,
-      "spray_accuracy": 12.5
-    },
-    {
-      "id": "da93a42c-b985-4053-9664-d4d08e1aa9a9",
-      "finished_at": "2026-04-08T02:44:53.000Z",
-      "data_source": "matchmaking",
-      "outcome": "loss",
-      "rank": 7,
-      "rank_type": 12,
-      "map_name": "de_inferno",
-      "leetify_rating": 0.0047,
-      "score": [
-        9,
-        13
-      ],
-      "preaim": 11.1,
-      "reaction_time_ms": 789,
-      "accuracy_enemy_spotted": 21.88,
-      "accuracy_head": 11.59,
-      "spray_accuracy": 21.25
     }
   ],
   "recent_teammates": [
     {
-      "steam64_id": "76561198196276253",
-      "recent_matches_count": 13
+      "steam64_id": "76561198366694516",
+      "recent_matches_count": 10
     },
     {
       "steam64_id": "76561199226399136",
-      "recent_matches_count": 72
+      "recent_matches_count": 73
+    },
+    {
+      "steam64_id": "76561198196276253",
+      "recent_matches_count": 13
     },
     {
       "steam64_id": "76561199020941150",
@@ -2022,7 +2026,7 @@
     },
     {
       "steam64_id": "76561198120946574",
-      "recent_matches_count": 17
+      "recent_matches_count": 15
     }
   ]
 }
