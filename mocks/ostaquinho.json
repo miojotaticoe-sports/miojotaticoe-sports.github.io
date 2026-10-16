@@ -1,14 +1,14 @@
 {
   "privacy_mode": "public",
   "winrate": 0.2759,
-  "total_matches": 1262,
+  "total_matches": 1264,
   "first_match_date": "2024-04-09T03:29:34.000Z",
   "name": "Dedos de Cheetos",
   "bans": [],
   "steam64_id": "76561199226399136",
   "id": "c56ad5c9-12cf-47ab-82d6-199a7ee9564e",
   "ranks": {
-    "leetify": -1.13,
+    "leetify": -0.13999999999999999,
     "premier": null,
     "faceit": null,
     "faceit_elo": null,
@@ -86,38 +86,76 @@
     ]
   },
   "rating": {
-    "aim": 43.2505,
-    "positioning": 59.0954,
-    "utility": 51.2303,
-    "clutch": 0.0805,
-    "opening": 0.0097,
-    "ct_leetify": 0.0002,
-    "t_leetify": -0.0193
+    "aim": 47.2097,
+    "positioning": 59.8706,
+    "utility": 49.4181,
+    "clutch": 0.0881,
+    "opening": 0.0112,
+    "ct_leetify": 0.0026,
+    "t_leetify": -0.0042
   },
   "stats": {
-    "accuracy_enemy_spotted": 29.8125,
-    "accuracy_head": 14.469,
-    "counter_strafing_good_shots_ratio": 71.5874,
-    "ct_opening_aggression_success_rate": 56.0695,
-    "ct_opening_duel_success_percentage": 44.1681,
-    "flashbang_hit_foe_avg_duration": 2.9096,
-    "flashbang_hit_foe_per_flashbang": 0.6335,
-    "flashbang_hit_friend_per_flashbang": 0.4363,
-    "flashbang_leading_to_kill": 8.7278,
-    "flashbang_thrown": 6.2486,
-    "he_foes_damage_avg": 5.1667,
-    "he_friends_damage_avg": 0.8583,
-    "preaim": 11.1636,
-    "reaction_time_ms": 596.0951,
-    "spray_accuracy": 33.7618,
-    "t_opening_aggression_success_rate": 67.7941,
-    "t_opening_duel_success_percentage": 45.7433,
-    "traded_deaths_success_percentage": 43.4268,
-    "trade_kill_opportunities_per_round": 0.2742,
-    "trade_kills_success_percentage": 34.3476,
-    "utility_on_death_avg": 343.053
+    "accuracy_enemy_spotted": 30.6763,
+    "accuracy_head": 14.7544,
+    "counter_strafing_good_shots_ratio": 71.2726,
+    "ct_opening_aggression_success_rate": 56.3553,
+    "ct_opening_duel_success_percentage": 47.2405,
+    "flashbang_hit_foe_avg_duration": 2.8481,
+    "flashbang_hit_foe_per_flashbang": 0.5889,
+    "flashbang_hit_friend_per_flashbang": 0.455,
+    "flashbang_leading_to_kill": 8.7438,
+    "flashbang_thrown": 6.2418,
+    "he_foes_damage_avg": 4.976,
+    "he_friends_damage_avg": 0.8637,
+    "preaim": 11.007,
+    "reaction_time_ms": 586.3114,
+    "spray_accuracy": 35.0955,
+    "t_opening_aggression_success_rate": 68.1015,
+    "t_opening_duel_success_percentage": 45.7814,
+    "traded_deaths_success_percentage": 43.4729,
+    "trade_kill_opportunities_per_round": 0.2692,
+    "trade_kills_success_percentage": 35.0559,
+    "utility_on_death_avg": 344.8571
   },
   "recent_matches": [
+    {
+      "id": "23cd3327-1291-43b2-979b-c73a2bfcaa76",
+      "finished_at": "2026-10-16T10:23:08.000Z",
+      "data_source": "matchmaking",
+      "outcome": "win",
+      "rank": 3,
+      "rank_type": 12,
+      "map_name": "de_dust2",
+      "leetify_rating": -0.0069,
+      "score": [
+        13,
+        6
+      ],
+      "preaim": 11.52,
+      "reaction_time_ms": 609,
+      "accuracy_enemy_spotted": 35.29,
+      "accuracy_head": 16.13,
+      "spray_accuracy": 54.76
+    },
+    {
+      "id": "13a1bac2-cbdb-4657-8bb9-3fa0d04ab0b1",
+      "finished_at": "2026-10-16T09:40:00.000Z",
+      "data_source": "matchmaking",
+      "outcome": "loss",
+      "rank": 3,
+      "rank_type": 12,
+      "map_name": "de_dust2",
+      "leetify_rating": 0.2101,
+      "score": [
+        11,
+        13
+      ],
+      "preaim": 8.86,
+      "reaction_time_ms": 625,
+      "accuracy_enemy_spotted": 33.85,
+      "accuracy_head": 26.61,
+      "spray_accuracy": 36.9
+    },
     {
       "id": "ef6f3924-7673-48d7-adcb-734c5db6dbd6",
       "finished_at": "2026-10-16T02:22:58.000Z",
@@ -1979,50 +2017,12 @@
       "accuracy_enemy_spotted": 29.93,
       "accuracy_head": 12.77,
       "spray_accuracy": 40
-    },
-    {
-      "id": "9d833365-3f96-4fde-ace5-eef85ca95e93",
-      "finished_at": "2026-04-11T23:32:11.000Z",
-      "data_source": "matchmaking",
-      "outcome": "loss",
-      "rank": 8701,
-      "rank_type": 11,
-      "map_name": "de_inferno",
-      "leetify_rating": -0.0944,
-      "score": [
-        4,
-        13
-      ],
-      "preaim": 18.69,
-      "reaction_time_ms": 750,
-      "accuracy_enemy_spotted": 18.4,
-      "accuracy_head": 9.09,
-      "spray_accuracy": 4.76
-    },
-    {
-      "id": "549d7560-52a3-4724-b5b7-464453e729f0",
-      "finished_at": "2026-04-10T23:19:55.000Z",
-      "data_source": "matchmaking",
-      "outcome": "loss",
-      "rank": 6,
-      "rank_type": 12,
-      "map_name": "de_anubis",
-      "leetify_rating": -0.066,
-      "score": [
-        10,
-        13
-      ],
-      "preaim": 11.59,
-      "reaction_time_ms": 516,
-      "accuracy_enemy_spotted": 32.73,
-      "accuracy_head": 13.16,
-      "spray_accuracy": 41.67
     }
   ],
   "recent_teammates": [
     {
       "steam64_id": "76561198241857054",
-      "recent_matches_count": 77
+      "recent_matches_count": 78
     },
     {
       "steam64_id": "76561198315565716",
