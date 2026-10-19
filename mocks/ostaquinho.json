@@ -1,14 +1,14 @@
 {
   "privacy_mode": "public",
-  "winrate": 0.2414,
-  "total_matches": 1267,
+  "winrate": 0.2759,
+  "total_matches": 1268,
   "first_match_date": "2024-04-09T03:29:34.000Z",
   "name": "Dedos de Cheetos",
   "bans": [],
   "steam64_id": "76561199226399136",
   "id": "c56ad5c9-12cf-47ab-82d6-199a7ee9564e",
   "ranks": {
-    "leetify": 0.32,
+    "leetify": 0.52,
     "premier": null,
     "faceit": null,
     "faceit_elo": null,
@@ -86,38 +86,57 @@
     ]
   },
   "rating": {
-    "aim": 45.6205,
-    "positioning": 63.6831,
-    "utility": 52.8524,
-    "clutch": 0.0861,
-    "opening": 0.0161,
-    "ct_leetify": 0.0109,
-    "t_leetify": -0.0029
+    "aim": 46.0172,
+    "positioning": 64.8027,
+    "utility": 51.7498,
+    "clutch": 0.0887,
+    "opening": 0.0174,
+    "ct_leetify": 0.0127,
+    "t_leetify": -0.0009
   },
   "stats": {
-    "accuracy_enemy_spotted": 31.1112,
-    "accuracy_head": 13.7691,
-    "counter_strafing_good_shots_ratio": 71.3099,
-    "ct_opening_aggression_success_rate": 61.7759,
-    "ct_opening_duel_success_percentage": 54.7671,
-    "flashbang_hit_foe_avg_duration": 3.1116,
-    "flashbang_hit_foe_per_flashbang": 0.623,
-    "flashbang_hit_friend_per_flashbang": 0.4715,
-    "flashbang_leading_to_kill": 8.4497,
-    "flashbang_thrown": 6.508,
-    "he_foes_damage_avg": 5.036,
-    "he_friends_damage_avg": 0.8374,
-    "preaim": 11.1433,
-    "reaction_time_ms": 595.8,
-    "spray_accuracy": 35.693,
-    "t_opening_aggression_success_rate": 64.9264,
-    "t_opening_duel_success_percentage": 42.3659,
-    "traded_deaths_success_percentage": 46.4357,
-    "trade_kill_opportunities_per_round": 0.2673,
-    "trade_kills_success_percentage": 39.1066,
-    "utility_on_death_avg": 324.0071
+    "accuracy_enemy_spotted": 31.0822,
+    "accuracy_head": 13.7636,
+    "counter_strafing_good_shots_ratio": 71.5442,
+    "ct_opening_aggression_success_rate": 62.1931,
+    "ct_opening_duel_success_percentage": 56.882,
+    "flashbang_hit_foe_avg_duration": 3.0557,
+    "flashbang_hit_foe_per_flashbang": 0.6061,
+    "flashbang_hit_friend_per_flashbang": 0.4759,
+    "flashbang_leading_to_kill": 8.3318,
+    "flashbang_thrown": 6.5253,
+    "he_foes_damage_avg": 4.922,
+    "he_friends_damage_avg": 0.8257,
+    "preaim": 11.0525,
+    "reaction_time_ms": 597.7225,
+    "spray_accuracy": 35.7138,
+    "t_opening_aggression_success_rate": 65.4161,
+    "t_opening_duel_success_percentage": 42.4724,
+    "traded_deaths_success_percentage": 47.3232,
+    "trade_kill_opportunities_per_round": 0.2618,
+    "trade_kills_success_percentage": 39.6426,
+    "utility_on_death_avg": 328.555
   },
   "recent_matches": [
+    {
+      "id": "ad63831c-599a-4247-8dcc-dac9a8210e57",
+      "finished_at": "2026-10-19T03:39:11.000Z",
+      "data_source": "matchmaking",
+      "outcome": "win",
+      "rank": 4,
+      "rank_type": 12,
+      "map_name": "de_anubis",
+      "leetify_rating": 0.0364,
+      "score": [
+        13,
+        9
+      ],
+      "preaim": 6.11,
+      "reaction_time_ms": 625,
+      "accuracy_enemy_spotted": 32.5,
+      "accuracy_head": 18.03,
+      "spray_accuracy": 34.69
+    },
     {
       "id": "07cc1a3f-7280-4427-873e-3a8492e9100d",
       "finished_at": "2026-10-19T02:58:46.000Z",
@@ -1998,25 +2017,6 @@
       "accuracy_enemy_spotted": 32.31,
       "accuracy_head": 13.95,
       "spray_accuracy": 32.35
-    },
-    {
-      "id": "20970844-ea21-4cdf-81c9-54fda38998ed",
-      "finished_at": "2026-04-15T01:58:47.000Z",
-      "data_source": "matchmaking",
-      "outcome": "loss",
-      "rank": 2,
-      "rank_type": 12,
-      "map_name": "de_dust2",
-      "leetify_rating": 0.0321,
-      "score": [
-        9,
-        13
-      ],
-      "preaim": 13.33,
-      "reaction_time_ms": 797,
-      "accuracy_enemy_spotted": 27,
-      "accuracy_head": 21.43,
-      "spray_accuracy": 32.69
     }
   ],
   "recent_teammates": [
@@ -2046,7 +2046,7 @@
     },
     {
       "steam64_id": "76561198120946574",
-      "recent_matches_count": 17
+      "recent_matches_count": 16
     }
   ]
 }
