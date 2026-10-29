@@ -1,7 +1,7 @@
 {
   "privacy_mode": "public",
   "winrate": 0.5333,
-  "total_matches": 1010,
+  "total_matches": 1011,
   "first_match_date": "2024-08-05T01:40:34.000Z",
   "name": "OffGamer_21",
   "bans": [],
@@ -102,6 +102,25 @@
     "utility_on_death_avg": 385.5124
   },
   "recent_matches": [
+    {
+      "id": "a3f310c1-6a8e-4a18-a406-ea0e539469b4",
+      "finished_at": "2026-10-28T22:10:08.000Z",
+      "data_source": "matchmaking_wingman",
+      "outcome": "loss",
+      "rank": 0,
+      "rank_type": 7,
+      "map_name": "de_inferno",
+      "leetify_rating": -0.0644,
+      "score": [
+        3,
+        9
+      ],
+      "preaim": 9.76,
+      "reaction_time_ms": 711,
+      "accuracy_enemy_spotted": 38.84,
+      "accuracy_head": 14.58,
+      "spray_accuracy": 50
+    },
     {
       "id": "af65e199-37d2-4aab-9ea9-18d3aa6c9246",
       "finished_at": "2026-10-28T00:09:56.000Z",
@@ -1982,25 +2001,6 @@
       "accuracy_enemy_spotted": 36.5,
       "accuracy_head": 4,
       "spray_accuracy": 33.93
-    },
-    {
-      "id": "596db33e-2392-41bd-802b-ec77a84e5d1a",
-      "finished_at": "2026-02-09T02:57:20.000Z",
-      "data_source": "matchmaking",
-      "outcome": "tie",
-      "rank": 6,
-      "rank_type": 12,
-      "map_name": "de_inferno",
-      "leetify_rating": 0.0484,
-      "score": [
-        12,
-        12
-      ],
-      "preaim": 10.21,
-      "reaction_time_ms": 578,
-      "accuracy_enemy_spotted": 48.34,
-      "accuracy_head": 3.17,
-      "spray_accuracy": 55.56
     }
   ],
   "recent_teammates": [
@@ -2010,7 +2010,7 @@
     },
     {
       "steam64_id": "76561199226399136",
-      "recent_matches_count": 15
+      "recent_matches_count": 14
     },
     {
       "steam64_id": "76561198402512698",
@@ -2018,7 +2018,7 @@
     },
     {
       "steam64_id": "76561198241857054",
-      "recent_matches_count": 14
+      "recent_matches_count": 13
     },
     {
       "steam64_id": "76561198063443948",
